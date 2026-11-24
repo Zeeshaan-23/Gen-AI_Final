@@ -1,0 +1,57 @@
+﻿=== CatalogUpdate AI - File Tree Audit ===
+Working Directory: D:\College\Sem 5\GenAI\Project\catalogupdate-ai
+Timestamp: 2026-11-22T16.35.31Z
+
+--- Full File Listing (Recurse) ---
+
+FullName                                                                                      Length
+--------                                                                                      ------
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\.gitignore                                       326
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\app.py                                         20045
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\DECISIONS.md                                    7993
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\PLAN.md                                         5092
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\PROGRESS.md                                    10849
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\PROJECT.md                                      3658
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\README.md                                       2084
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\requirements.txt                                 176
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\data\output_archive.zip                         1265
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\data\input\.gitkeep                                2
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\data\input\sample_chair.png                     2056
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\data\output\.gitkeep                               2
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\data\output\manifest.json                        313
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\data\output\sample_chair_edited.png             2089
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\data\output\masks\sample_chair_mask.png          546
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\notebooks\colab_run.ipynb                       8309
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\src\batch.py                                   14933
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\src\config.py                                    967
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\src\engine.py                                  11266
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\src\evaluate.py                                 4785
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\src\prompts.py                                  7582
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\src\__init__.py                                  631
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\tests\conftest.py                               1383
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\tests\test_batch.py                             5403
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\tests\test_engine.py                            1724
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\tests\test_evaluate.py                          3093
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\tests\test_prompts.py                           1370
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\verification\logs\01_file_tree.txt                 0
+D:\College\Sem 5\GenAI\Project\catalogupdate-ai\verification\logs\02_install_requirements.txt  27790
+
+
+
+--- PROJECT.md Section 6 File Verification ---
+[PASS] PROJECT.md : EXISTS (3658 bytes)
+[PASS] PLAN.md : EXISTS (5092 bytes)
+[PASS] PROGRESS.md : EXISTS (10849 bytes)
+[PASS] DECISIONS.md : EXISTS (7993 bytes)
+[PASS] README.md : EXISTS (2084 bytes)
+[PASS] requirements.txt : EXISTS (176 bytes)
+[PASS] app.py : EXISTS (20045 bytes)
+[PASS] src/__init__.py : EXISTS (631 bytes)
+[PASS] src/engine.py : EXISTS (11266 bytes)
+[PASS] src/batch.py : EXISTS (14933 bytes)
+[PASS] src/prompts.py : EXISTS (7582 bytes)
+[PASS] src/evaluate.py : EXISTS (4785 bytes)
+[PASS] notebooks/colab_run.ipynb : EXISTS (8309 bytes)
+[PASS] data/input/sample_chair.png : EXISTS (2056 bytes)
+
+All PROJECT.md files verified non-empty: True

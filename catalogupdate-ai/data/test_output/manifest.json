@@ -1,0 +1,29 @@
+[
+  {
+    "name": "chair_01.png",
+    "status": "success",
+    "mask_coverage_pct": 4.13,
+    "time_s": 0.031,
+    "output_path": "D:\\College\\Sem 5\\GenAI\\Project\\catalogupdate-ai\\data\\test_output\\chair_01_edited.png",
+    "part_text": "chair legs",
+    "prompt": "chair legs made of solid walnut wood, dark walnut, natural satin finish, clean tapered, rich natural wood grain, studio product photo, white background, sharp, high detail, consistent lighting"
+  },
+  {
+    "name": "chair_02.png",
+    "status": "success",
+    "mask_coverage_pct": 4.13,
+    "time_s": 0.026,
+    "output_path": "D:\\College\\Sem 5\\GenAI\\Project\\catalogupdate-ai\\data\\test_output\\chair_02_edited.png",
+    "part_text": "chair legs",
+    "prompt": "chair legs made of solid walnut wood, dark walnut, natural satin finish, clean tapered, rich natural wood grain, studio product photo, white background, sharp, high detail, consistent lighting"
+  },
+  {
+    "name": "chair_03.png",
+    "status": "success",
+    "mask_coverage_pct": 4.13,
+    "time_s": 0.028,
+    "output_path": "D:\\College\\Sem 5\\GenAI\\Project\\catalogupdate-ai\\data\\test_output\\chair_03_edited.png",
+    "part_text": "chair legs",
+    "prompt": "chair legs made of solid walnut wood, dark walnut, natural satin finish, clean tapered, rich natural wood grain, studio product photo, white background, sharp, high detail, consistent lighting"
+  }
+]

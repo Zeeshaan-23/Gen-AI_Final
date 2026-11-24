@@ -1,0 +1,23 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.2.0, pluggy-1.7.0 -- D:\College\Sem 5\GenAI\Project\catalogupdate-ai\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\College\Sem 5\GenAI\Project\catalogupdate-ai
+configfile: pytest.ini
+plugins: anyio-4.16.0, platformdirs-4.14.8
+collecting ... collected 13 items
+
+tests/test_batch.py::test_batch_processing_dummy_images PASSED           [  7%]
+tests/test_batch.py::test_batch_empty_mask_no_part_found PASSED          [ 15%]
+tests/test_batch.py::test_batch_per_image_exception_recovery PASSED      [ 23%]
+tests/test_batch.py::test_batch_retry_with_lower_threshold PASSED        [ 30%]
+tests/test_batch.py::test_zip_outputs PASSED                             [ 38%]
+tests/test_engine.py::test_paste_back_byte_identical PASSED              [ 46%]
+tests/test_engine.py::test_catalog_editor_lazy_loading PASSED            [ 53%]
+tests/test_evaluate.py::test_ssim_outside_mask_identical PASSED          [ 61%]
+tests/test_evaluate.py::test_ssim_outside_mask_differing PASSED          [ 69%]
+tests/test_evaluate.py::test_ssim_outside_mask_full_mask PASSED          [ 76%]
+tests/test_evaluate.py::test_evaluate_run_writes_csv PASSED              [ 84%]
+tests/test_prompts.py::test_all_furniture_presets PASSED                 [ 92%]
+tests/test_prompts.py::test_build_prompt_empty_part PASSED               [100%]
+
+============================= 13 passed in 3.45s ==============================

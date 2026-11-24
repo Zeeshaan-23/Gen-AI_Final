@@ -1,0 +1,27 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Output directories & manifests
+data/output/*
+!data/output/.gitkeep
+
+# Model caches and checkpoints
+.cache/
+hf_cache/
+checkpoints/
+*.pt
+*.bin
+*.safetensors
+
+# Virtual environment and IDE
+venv/
+.venv/
+env/
+.idea/
+.vscode/
+
+# OS specific
+.DS_Store
+Thumbs.db

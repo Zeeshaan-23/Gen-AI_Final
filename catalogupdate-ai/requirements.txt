@@ -1,0 +1,10 @@
+torch>=2.1.0
+diffusers>=0.29.0
+transformers>=4.42.0
+accelerate>=0.32.0
+safetensors>=0.4.3
+gradio>=4.38.0
+Pillow>=10.3.0
+numpy>=1.24.4,<2.0.0
+scikit-image>=0.24.0
+scipy>=1.11.0

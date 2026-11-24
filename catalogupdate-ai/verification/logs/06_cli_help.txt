@@ -1,0 +1,36 @@
+﻿usage: batch.py [-h] [--input INPUT] [--output OUTPUT]
+                [--preset {chair_walnut_legs,sofa_charcoal_linen,table_carrara_marble,cabinet_brushed_brass,armrests_black_leather,cushion_teal_velvet,wood_matte_oak,chair_beige_boucle,desk_matte_black_steel,dining_woven_rattan,table_chrome_base,headboard_emerald_velvet}]
+                [--part PART] [--prompt PROMPT] [--color COLOR]
+                [--material MATERIAL] [--finish FINISH]
+                [--negative-prompt NEGATIVE_PROMPT] [--threshold THRESHOLD]
+                [--no-retry] [--dilate DILATE] [--steps STEPS]
+                [--guidance GUIDANCE] [--strength STRENGTH] [--seed SEED]
+                [--device DEVICE] [--zip] [--mock]
+
+CatalogUpdate AI - Batch Processing CLI
+
+options:
+  -h, --help            show this help message and exit
+  --input INPUT         Path to input image directory
+  --output OUTPUT       Path to output directory
+  --preset {chair_walnut_legs,sofa_charcoal_linen,table_carrara_marble,cabinet_brushed_brass,armrests_black_leather,cushion_teal_velvet,wood_matte_oak,chair_beige_boucle,desk_matte_black_steel,dining_woven_rattan,table_chrome_base,headboard_emerald_velvet}
+                        Preset key (e.g. chair_walnut_legs)
+  --part PART           Furniture part to mask (e.g. 'chair legs')
+  --prompt PROMPT       Replacement spec prompt
+  --color COLOR         Spec color attribute
+  --material MATERIAL   Spec material attribute
+  --finish FINISH       Spec finish attribute
+  --negative-prompt NEGATIVE_PROMPT
+                        Negative prompt
+  --threshold THRESHOLD
+                        Mask probability threshold
+  --no-retry            Disable automatic retry with larger mask on low
+                        coverage
+  --dilate DILATE       Mask dilation radius in pixels
+  --steps STEPS         Inpainting inference steps
+  --guidance GUIDANCE   Guidance scale
+  --strength STRENGTH   Inpainting strength
+  --seed SEED           Random seed
+  --device DEVICE       Target device (cuda or cpu)
+  --zip                 Create a zip archive of the output directory
+  --mock                Run with mock engine on CPU without loading models

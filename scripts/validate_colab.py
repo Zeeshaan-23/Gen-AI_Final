@@ -37,9 +37,21 @@ c8_source = "".join(nb.cells[8].source)
 assert '"success" in m["status"]' in c8_source
 print("Cell 8 status filter: PASS (includes retried_mask entries)")
 
-print("\n=== 6. Cell 10 Public Gradio Share Verification ===")
+print("\n=== 6. Cell 9 ControlNet Batch Run Verification ===")
+c9_source = "".join(nb.cells[9].source)
+assert '"use_controlnet": True' in c9_source
+assert '"controlnet_scale": 0.8' in c9_source
+print("Cell 9 ControlNet batch execution: PASS")
+
+print("\n=== 7. Cell 10 ControlNet Compare & Grid Verification ===")
 c10_source = "".join(nb.cells[10].source)
-assert "--share" in c10_source
-print("Cell 10 Gradio launch with --share: PASS")
+assert "compare_controlnet" in c10_source
+assert "grid_path" in c10_source
+print("Cell 10 ControlNet comparison pipeline: PASS")
+
+print("\n=== 8. Cell 12 Public Gradio Share Verification ===")
+c12_source = "".join(nb.cells[12].source)
+assert "--share" in c12_source
+print("Cell 12 Gradio launch with --share: PASS")
 
 print("\nColab Readiness Overall Status: PASS")

@@ -27,6 +27,10 @@ from src.config import (
     DEFAULT_RETRY_MASK_THRESHOLD,
     DEFAULT_MASK_DILATION_PX,
     MIN_MASK_COVERAGE_PCT,
+    DEFAULT_USE_CONTROLNET,
+    DEFAULT_CONTROLNET_SCALE,
+    DEFAULT_CANNY_LOW,
+    DEFAULT_CANNY_HIGH,
 )
 from src.prompts import build_prompt, FURNITURE_PRESETS, DEFAULT_NEGATIVE_PROMPT
 
@@ -59,11 +63,22 @@ class MockCatalogEditor:
         draw.rectangle([x0, y0, x1, y1], fill=255)
         return mask
 
+    def make_control_image(
+        self,
+        image: Image.Image,
+        low_threshold: int = DEFAULT_CANNY_LOW,
+        high_threshold: int = DEFAULT_CANNY_HIGH,
+    ) -> Image.Image:
+        from src.engine import make_control_image
+        return make_control_image(image, low_threshold=low_threshold, high_threshold=high_threshold)
+
     def inpaint(
         self,
         image: Image.Image,
         mask: Image.Image,
         prompt: str,
+        use_controlnet: bool = False,
+        controlnet_scale: float = DEFAULT_CONTROLNET_SCALE,
         **kwargs,
     ) -> Image.Image:
         res = image.convert("RGB").copy()
@@ -76,11 +91,21 @@ class MockCatalogEditor:
         image: Image.Image,
         part_text: str,
         new_spec_prompt: str,
+        use_controlnet: bool = False,
+        controlnet_scale: float = DEFAULT_CONTROLNET_SCALE,
         **kwargs,
     ) -> Dict[str, Image.Image]:
         mask = self.generate_mask(image, part_text)
-        result = self.inpaint(image, mask, new_spec_prompt, **kwargs)
-        return {"mask": mask, "result": result}
+        result = self.inpaint(
+            image,
+            mask,
+            new_spec_prompt,
+            use_controlnet=use_controlnet,
+            controlnet_scale=controlnet_scale,
+            **kwargs,
+        )
+        control = self.make_control_image(image)
+        return {"mask": mask, "result": result, "control": control}
 
 
 def run_batch(
@@ -129,6 +154,14 @@ def run_batch(
     seed = params.get("seed", DEFAULT_SEED)
     device = params.get("device", "cuda")
     mock = mock or params.get("mock", False)
+    use_controlnet = bool(params.get("use_controlnet", DEFAULT_USE_CONTROLNET))
+    controlnet_scale = float(params.get("controlnet_scale", DEFAULT_CONTROLNET_SCALE))
+    canny_low = int(params.get("canny_low", DEFAULT_CANNY_LOW))
+    canny_high = int(params.get("canny_high", DEFAULT_CANNY_HIGH))
+
+    control_path = output_path / "control"
+    if use_controlnet:
+        control_path.mkdir(parents=True, exist_ok=True)
 
     # Resolve structured prompt if change dict or structured fields are passed
     change_dict = params.get("change")
@@ -211,6 +244,10 @@ def run_batch(
             # Save the final mask for inspection
             mask.save(mask_file)
 
+            if use_controlnet:
+                ctrl_img = editor.make_control_image(img, low_threshold=canny_low, high_threshold=canny_high)
+                ctrl_img.save(control_path / f"{stem}_control.png")
+
             if coverage_pct < MIN_MASK_COVERAGE_PCT:
                 status = "no_part_found"
                 output_path_str = None
@@ -226,6 +263,10 @@ def run_batch(
                     guidance=guidance,
                     strength=strength,
                     seed=seed,
+                    use_controlnet=use_controlnet,
+                    controlnet_scale=controlnet_scale,
+                    canny_low=canny_low,
+                    canny_high=canny_high,
                 )
                 edited.save(edited_file)
                 status = "success (retried_mask)" if retried else "success"
@@ -241,6 +282,8 @@ def run_batch(
                 "output_path": output_path_str,
                 "part_text": part_text,
                 "prompt": spec_prompt,
+                "use_controlnet": use_controlnet,
+                "controlnet_scale": controlnet_scale,
             }
 
         except Exception as e:
@@ -254,6 +297,8 @@ def run_batch(
                 "output_path": None,
                 "part_text": part_text,
                 "prompt": spec_prompt,
+                "use_controlnet": use_controlnet,
+                "controlnet_scale": controlnet_scale,
             }
 
         manifest.append(record)
@@ -319,6 +364,8 @@ def main():
     parser.add_argument("--strength", type=float, default=DEFAULT_STRENGTH, help="Inpainting strength")
     parser.add_argument("--seed", type=int, default=DEFAULT_SEED, help="Random seed")
     parser.add_argument("--device", default="cuda", help="Target device (cuda or cpu)")
+    parser.add_argument("--controlnet", action="store_true", help="Enable ControlNet structure preservation")
+    parser.add_argument("--controlnet-scale", type=float, default=DEFAULT_CONTROLNET_SCALE, help=f"ControlNet conditioning scale (default: {DEFAULT_CONTROLNET_SCALE})")
     parser.add_argument("--zip", action="store_true", help="Create a zip archive of the output directory")
     parser.add_argument("--mock", action="store_true", help="Run with mock engine on CPU without loading models")
 
@@ -362,6 +409,8 @@ def main():
         "seed": args.seed,
         "device": args.device,
         "mock": args.mock,
+        "use_controlnet": args.controlnet,
+        "controlnet_scale": args.controlnet_scale,
     }
 
     manifest = run_batch(

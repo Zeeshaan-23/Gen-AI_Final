@@ -36,6 +36,7 @@ CatalogUpdate AI is a batch product-image editor designed specifically for furni
 ## 4. Models
 - **Inpainting Model**: `stable-diffusion-v1-5/stable-diffusion-inpainting` (FP16 on CUDA, CPU fallback for import verification)
 - **Auto-Masking Model**: `CIDAS/clipseg-rd64-refined`
+- **ControlNet Model**: `lllyasviel/control_v11p_sd15_canny` (FP16 on CUDA, optional structure preservation)
 
 ---
 
@@ -64,12 +65,14 @@ Gen-AI_Final/
     __init__.py
     engine.py
     batch.py
+    compare.py
     prompts.py
     evaluate.py
     config.py
   tests/
     conftest.py
     test_batch.py
+    test_controlnet.py
     test_engine.py
     test_evaluate.py
     test_prompts.py

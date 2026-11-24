@@ -23,6 +23,8 @@ from src.config import (
     DEFAULT_RETRY_MASK_THRESHOLD,
     DEFAULT_MASK_DILATION_PX,
     DEFAULT_SEED,
+    DEFAULT_USE_CONTROLNET,
+    DEFAULT_CONTROLNET_SCALE,
 )
 from src.prompts import FURNITURE_PRESETS, build_prompt, DEFAULT_NEGATIVE_PROMPT
 from src.engine import CatalogEditor
@@ -145,19 +147,21 @@ def process_batch_ui(
     retry_larger_mask: bool,
     dilate_px: int,
     seed: int,
+    use_controlnet: bool = DEFAULT_USE_CONTROLNET,
+    controlnet_scale: float = DEFAULT_CONTROLNET_SCALE,
     progress=gr.Progress(track_tqdm=True),
 ):
     if not files:
         gr.Warning("Please upload at least one catalog image.")
-        return [], [], [], None
+        return [], [], [], [], None
 
     if not part_text or not part_text.strip():
         gr.Warning("Please specify the furniture part to change (e.g. 'chair legs').")
-        return [], [], [], None
+        return [], [], [], [], None
 
     if not spec_prompt or not spec_prompt.strip():
         gr.Warning("Please specify the new spec prompt (e.g. 'dark walnut wood legs').")
-        return [], [], [], None
+        return [], [], [], [], None
 
     temp_dir = tempfile.mkdtemp(prefix="catalog_batch_")
     in_dir = Path(temp_dir) / "input"
@@ -182,6 +186,8 @@ def process_batch_ui(
         "steps": int(steps),
         "guidance": float(guidance),
         "seed": int(seed),
+        "use_controlnet": bool(use_controlnet),
+        "controlnet_scale": float(controlnet_scale),
         "editor": editor,
     }
 
@@ -199,6 +205,7 @@ def process_batch_ui(
 
     before_after_gallery = []
     masks_gallery = []
+    controls_gallery = []
     table_rows = []
 
     success_count = 0
@@ -215,6 +222,10 @@ def process_batch_ui(
         if mask_file.exists():
             masks_gallery.append((str(mask_file), f"Mask: {item['name']} ({item['mask_coverage_pct']}%)"))
 
+        ctrl_file = out_dir / "control" / f"{Path(item['name']).stem}_control.png"
+        if ctrl_file.exists():
+            controls_gallery.append((str(ctrl_file), f"Edge Map: {item['name']}"))
+
         if "success" in item["status"] and item["output_path"]:
             success_count += 1
             orig_file = in_dir / item["name"]
@@ -226,7 +237,7 @@ def process_batch_ui(
     else:
         gr.Info(f"Batch completed: {success_count}/{len(manifest)} images successfully updated!")
 
-    return before_after_gallery, masks_gallery, table_rows, zip_path
+    return before_after_gallery, masks_gallery, controls_gallery, table_rows, zip_path
 
 
 # --- TAB 2: SINGLE IMAGE HANDLERS ---
@@ -279,16 +290,18 @@ def process_single_ui(
     threshold: float,
     dilate_px: int,
     seed: int,
+    use_controlnet: bool = DEFAULT_USE_CONTROLNET,
+    controlnet_scale: float = DEFAULT_CONTROLNET_SCALE,
     progress=gr.Progress(),
 ):
     bg_img, drawn_mask = extract_mask_from_editor(editor_data)
     if bg_img is None:
         gr.Warning("Please upload an image into the editor first.")
-        return None, None, None
+        return None, None, None, None
 
     if not spec_prompt or not spec_prompt.strip():
         gr.Warning("Please specify the new spec prompt (e.g. 'dark walnut wood').")
-        return None, None, None
+        return None, None, None, None
 
     if drawn_mask is not None:
         final_mask = drawn_mask
@@ -297,14 +310,15 @@ def process_single_ui(
     else:
         if not part_text or not part_text.strip():
             gr.Warning("Please enter a part description or paint a mask.")
-            return None, None, None
+            return None, None, None, None
         final_mask = editor.generate_mask(bg_img, part_text.strip(), threshold=float(threshold), dilate_px=int(dilate_px))
 
     mask_arr = np.array(final_mask)
     coverage = round((np.count_nonzero(mask_arr > 0) / mask_arr.size) * 100.0, 2)
     if coverage < 0.5:
         gr.Warning(f"Mask is empty or under 0.5% coverage ({coverage}%). Paint a mask or lower threshold.")
-        return bg_img, None, final_mask
+        control_preview = editor.make_control_image(bg_img)
+        return bg_img, None, final_mask, control_preview
 
     progress((0, 1), desc="Inpainting new specification...")
     result = editor.inpaint(
@@ -315,9 +329,12 @@ def process_single_ui(
         steps=int(steps),
         guidance=float(guidance),
         seed=int(seed),
+        use_controlnet=bool(use_controlnet),
+        controlnet_scale=float(controlnet_scale),
     )
+    control_img = editor.make_control_image(bg_img)
     gr.Info("Inpainting finished successfully!")
-    return bg_img, result, final_mask
+    return bg_img, result, final_mask, control_img
 
 
 # --- BUILD GRADIO INTERFACE ---
@@ -372,6 +389,17 @@ with gr.Blocks(title="CatalogUpdate AI - Furniture Catalog Editor") as demo:
                             batch_threshold = gr.Slider(0.1, 0.9, value=DEFAULT_MASK_THRESHOLD, step=0.05, label="Mask Threshold")
                             batch_dilate = gr.Slider(0, 30, value=DEFAULT_MASK_DILATION_PX, step=1, label="Mask Dilation (px)")
                             batch_seed = gr.Number(value=DEFAULT_SEED, label="Random Seed", precision=0)
+                        with gr.Row():
+                            batch_use_controlnet = gr.Checkbox(
+                                label="Preserve structure (ControlNet)",
+                                value=DEFAULT_USE_CONTROLNET,
+                            )
+                            batch_controlnet_scale = gr.Slider(
+                                0.0, 1.5,
+                                value=DEFAULT_CONTROLNET_SCALE,
+                                step=0.05,
+                                label="ControlNet strength",
+                            )
                         batch_retry_mask = gr.Checkbox(
                             label="Retry with larger mask if coverage < 0.5%",
                             value=True,
@@ -392,6 +420,11 @@ with gr.Blocks(title="CatalogUpdate AI - Furniture Catalog Editor") as demo:
                     )
                     batch_masks = gr.Gallery(
                         label="Generated Component Masks",
+                        columns=3,
+                        height="auto",
+                    )
+                    batch_controls = gr.Gallery(
+                        label="ControlNet Edge Maps (Canny)",
                         columns=3,
                         height="auto",
                     )
@@ -428,8 +461,10 @@ with gr.Blocks(title="CatalogUpdate AI - Furniture Catalog Editor") as demo:
                     batch_retry_mask,
                     batch_dilate,
                     batch_seed,
+                    batch_use_controlnet,
+                    batch_controlnet_scale,
                 ],
-                outputs=[batch_gallery, batch_masks, batch_table, batch_zip_out],
+                outputs=[batch_gallery, batch_masks, batch_controls, batch_table, batch_zip_out],
             )
 
         # --- TAB 2: SINGLE IMAGE INTERACTIVE ---
@@ -469,6 +504,17 @@ with gr.Blocks(title="CatalogUpdate AI - Furniture Catalog Editor") as demo:
                             single_threshold = gr.Slider(0.1, 0.9, value=DEFAULT_MASK_THRESHOLD, step=0.05, label="Mask Threshold")
                             single_dilate = gr.Slider(0, 30, value=DEFAULT_MASK_DILATION_PX, step=1, label="Mask Dilation (px)")
                             single_seed = gr.Number(value=DEFAULT_SEED, label="Random Seed", precision=0)
+                        with gr.Row():
+                            single_use_controlnet = gr.Checkbox(
+                                label="Preserve structure (ControlNet)",
+                                value=DEFAULT_USE_CONTROLNET,
+                            )
+                            single_controlnet_scale = gr.Slider(
+                                0.0, 1.5,
+                                value=DEFAULT_CONTROLNET_SCALE,
+                                step=0.05,
+                                label="ControlNet strength",
+                            )
                         single_neg = gr.Textbox(
                             label="Negative Prompt",
                             value=DEFAULT_NEGATIVE_PROMPT,
@@ -480,6 +526,7 @@ with gr.Blocks(title="CatalogUpdate AI - Furniture Catalog Editor") as demo:
                     with gr.Row():
                         single_orig_view = gr.Image(label="Original Image", type="pil")
                         single_mask_view = gr.Image(label="Mask Used (White = Edit)", type="pil")
+                        single_control_view = gr.Image(label="ControlNet Edge Map", type="pil")
                     single_result_view = gr.Image(label="Inpainted Spec Result", type="pil")
 
             single_preset.change(
@@ -509,8 +556,10 @@ with gr.Blocks(title="CatalogUpdate AI - Furniture Catalog Editor") as demo:
                     single_threshold,
                     single_dilate,
                     single_seed,
+                    single_use_controlnet,
+                    single_controlnet_scale,
                 ],
-                outputs=[single_orig_view, single_result_view, single_mask_view],
+                outputs=[single_orig_view, single_result_view, single_mask_view, single_control_view],
             )
 
 

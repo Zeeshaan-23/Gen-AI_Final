@@ -27,8 +27,10 @@ A batch product-image editor designed for furniture catalogs. The tool automatic
    * **Cell 5 & 6**: Runs the smoke test using `CatalogEditor` and visualizes the side-by-side comparison (`Original` vs `Auto-Mask` vs `Inpainted Result`).
    * **Cell 7**: Runs the batch pipeline across `data/input/`.
    * **Cell 8**: Displays the batch results grid (Before vs. Mask vs. After).
-   * **Cell 9**: Packages and downloads the output archive.
-   * **Cell 10**: Launches the Gradio web interface with `share=True` for interactive batch editing.
+   * **Cell 9**: Runs the structure-preserving batch pipeline with ControlNet Canny.
+   * **Cell 10**: Runs `compare_controlnet` and displays the side-by-side 4-column comparison grid and edge-map SSIM metrics.
+   * **Cell 11**: Packages and downloads the output archive.
+   * **Cell 12**: Launches the Gradio web interface with `share=True` for interactive batch editing.
 
 ---
 
@@ -36,24 +38,26 @@ A batch product-image editor designed for furniture catalogs. The tool automatic
 ```
 Gen-AI_Final/
   PROJECT.md        # Goals, architecture, tech stack, constraints
-  PLAN.md           # 5-phase execution plan and task checklist
+  PLAN.md           # Execution plan and task checklist
   PROGRESS.md       # Append-only chronological engineering log
   DECISIONS.md      # Architectural & technical decisions
   DEMO.md           # Quickstart and demo run guide
   README.md         # Project documentation and Colab setup guide
   requirements.txt  # Pinned dependencies
   .gitignore        # Git ignore rules
-  app.py            # Gradio web interface (batch + single-image manual mask)
+  app.py            # Gradio web interface (batch + single-image manual mask + ControlNet)
   src/
     __init__.py     # Module exports
-    engine.py       # Core inpainting & CLIPSeg segmentation engine
+    engine.py       # Core inpainting, CLIPSeg segmentation & ControlNet Canny engine
     batch.py        # Batch folder processor, mock engine, and manifest writer
+    compare.py      # Dual comparison pipeline (without vs with ControlNet) and edge SSIM
     prompts.py      # Spec-aware prompt templates & 12 furniture presets
     evaluate.py     # Evaluation metrics (SSIM outside mask)
     config.py       # Centralized hyperparameters & tuning configuration
   tests/            # Pytest test suite with CPU mock engine
     conftest.py     # Shared test fixtures
     test_batch.py   # Batch processing tests
+    test_controlnet.py # ControlNet edge map, manifest & compare tests
     test_engine.py  # Engine padding, clipping, and CPU safety tests
     test_evaluate.py# SSIM evaluation metric tests
     test_prompts.py # Prompt builder & preset validation tests

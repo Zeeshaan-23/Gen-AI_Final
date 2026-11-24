@@ -28,6 +28,8 @@ This document records technical decisions, model choices, parameter choices, and
 - **Structured Spec Prompt Engineering**: `build_prompt` in `src/prompts.py` decouples specification changes (`color`, `material`, `finish`) from free-text while enforcing standardized studio catalog lighting keywords.
 - **Automatic Mask Recovery (Retry with Lower Threshold)**: Added a single-retry recovery mechanism in `src/batch.py` that lowers the CLIPSeg threshold to 0.2 and widens dilation when initial mask coverage is below 0.5%, recovering thin furniture legs and angled parts without manual intervention.
 - **Unified FP16 Inpainting Pipeline (No VAE Float32 Upcast)**: Kept the SD inpainting pipeline entirely in fp16 on CUDA to eliminate `RuntimeError: Input type (c10::Half) and bias type (float) should be the same` tensor dtype mismatch during VAE decoding.
+- **ControlNet Canny for Structure Preservation**: Selected `lllyasviel/control_v11p_sd15_canny` over depth or normal models because Canny edge contours extract crisp geometric outlines of furniture components (legs, arms, frames) without depending on lighting or color, strictly anchoring physical silhouette and proportions during spec changes.
+- **Default ControlNet Conditioning Scale (`scale = 0.8`)**: Set default `controlnet_conditioning_scale` to 0.8 because values below 0.6 allow diffusion drift in leg geometry/joint straightness, while values above 1.0 over-constrain the inpainting region, causing edge artifacts and inhibiting realistic wood grain and material texture synthesis.
 
 ---
 

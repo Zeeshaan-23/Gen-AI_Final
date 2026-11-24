@@ -269,3 +269,37 @@ All dates are logged in local time (UTC+05:30).
   - Verify with pytest and pyflakes, commit, and push.
 - **Known issues**:
   - None.
+
+---
+
+### [2026-11-24 22:15] - Add ControlNet Structure Preservation & Comparative Evaluation
+- **What was done**:
+  - Implemented ControlNet Canny support (`lllyasviel/control_v11p_sd15_canny`) with `StableDiffusionControlNetInpaintPipeline` in `src/engine.py` (lazy-loaded when `use_controlnet=True`, FP16, attention slicing, no VAE float32 upcast).
+  - Implemented `make_control_image()` generating 512x512 3-channel Canny edge maps from the original image (cv2/skimage with PIL filter fallback).
+  - Extended `inpaint()` and `edit()` with `use_controlnet`, `controlnet_scale`, and returned `control` in edit results dict.
+  - Added centralized hyperparameters in `src/config.py`: `DEFAULT_USE_CONTROLNET`, `DEFAULT_CONTROLNET_SCALE=0.8`, `DEFAULT_CANNY_LOW=100`, `DEFAULT_CANNY_HIGH=200`, `CONTROLNET_MODEL_ID`.
+  - Updated `src/batch.py` and CLI with `--controlnet` and `--controlnet-scale`, logging both in `manifest.json`.
+  - Updated Gradio UI in `app.py`: added "Preserve structure (ControlNet)" checkbox, "ControlNet strength" slider, and Canny edge map previews in Tab 1 and Tab 2.
+  - Created `src/compare.py` (`compare_controlnet`) generating a 4-column comparison grid (Original | Mask | Without ControlNet | With ControlNet) and saving full-image edge-map SSIM metrics to CSV.
+  - Added unit test suite `tests/test_controlnet.py` (covering mock engine, CLI flags, manifest fields, edge map shapes/dtypes, and compare pipeline).
+  - Updated `notebooks/colab_run.ipynb` with new cells for ControlNet batch run and side-by-side comparison grid display.
+  - Updated documentation in `README.md`, `PROJECT.md`, `PLAN.md`, `DECISIONS.md`.
+- **Files touched**:
+  - `src/config.py`
+  - `src/engine.py`
+  - `src/batch.py`
+  - `src/compare.py`
+  - `src/__init__.py`
+  - `app.py`
+  - `tests/test_controlnet.py`
+  - `notebooks/colab_run.ipynb`
+  - `scripts/validate_colab.py`
+  - `README.md`
+  - `PROJECT.md`
+  - `PLAN.md`
+  - `DECISIONS.md`
+  - `PROGRESS.md`
+- **What is next**:
+  - Run verification, commit, and push.
+- **Known issues / COLAB-ONLY**:
+  - Local workstation has no GPU; model inference is tested via the mock engine on CPU and verified offline. Real ControlNet weights download and CUDA FP16 inpainting inference require Google Colab T4 GPU (marked COLAB-ONLY).

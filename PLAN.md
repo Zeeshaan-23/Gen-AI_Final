@@ -64,3 +64,18 @@ This document outlines the 5 execution phases of CatalogUpdate AI. Each phase in
 - [x] Write detailed `README.md` covering project overview, architecture, quickstart, Colab instructions, and sample outputs
 
 **Acceptance Criterion**: SSIM evaluation script validates background preservation on sample pairs, side-by-side comparison grids are generated, and README provides end-to-end instructions for reproducing results.
+
+---
+
+## Phase 6: ControlNet Structure Preservation & Comparative Evaluation
+- [x] Integrate `lllyasviel/control_v11p_sd15_canny` into `src/engine.py` using `StableDiffusionControlNetInpaintPipeline` (FP16, attention slicing, unified dtype)
+- [x] Implement `make_control_image(image)` extracting 3-channel 512x512 Canny edge maps with cv2/skimage/PIL fallback
+- [x] Extend `CatalogEditor.inpaint()` and `CatalogEditor.edit()` with `use_controlnet`, `controlnet_scale`, and return control image in results
+- [x] Add ControlNet hyperparameters (`DEFAULT_USE_CONTROLNET`, `DEFAULT_CONTROLNET_SCALE`, `DEFAULT_CANNY_LOW`, `DEFAULT_CANNY_HIGH`) in `src/config.py`
+- [x] Add `--controlnet` and `--controlnet-scale` CLI flags and manifest recording in `src/batch.py`
+- [x] Add ControlNet checkbox, strength slider, and Canny edge map preview components to Gradio UI (`app.py`) in both Tab 1 and Tab 2
+- [x] Create `src/compare.py` with `compare_controlnet()` generating 4-column visual comparison grids (Original | Mask | Without ControlNet | With ControlNet) and edge-map SSIM structure metrics CSV
+- [x] Add unit tests in `tests/test_controlnet.py` covering mock engine, CLI flags, manifest fields, edge map shapes, and comparison grids
+- [x] Add Google Colab cells for ControlNet batch execution and comparison grid visualization in `notebooks/colab_run.ipynb`
+
+**Acceptance Criterion**: Code imports cleanly on CPU without model downloads; unit tests and static checks pass; Colab notebook cells execute dual comparisons and demonstrate structure preservation.

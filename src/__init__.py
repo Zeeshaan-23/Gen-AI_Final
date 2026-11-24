@@ -17,6 +17,9 @@ def __getattr__(name: str):
     if name in ("compare_controlnet",):
         import src.compare as _compare
         return getattr(_compare, name)
+    if name in ("load_and_clean", "normalize_background", "pad_to_square", "resize_for_model", "preprocess_dir"):
+        import src.preprocess as _preprocess
+        return getattr(_preprocess, name)
     raise AttributeError(f"module 'src' has no attribute '{name}'")
 
 __all__ = [
@@ -28,4 +31,9 @@ __all__ = [
     "FURNITURE_PRESETS",
     "DEFAULT_NEGATIVE_PROMPT",
     "compare_controlnet",
+    "load_and_clean",
+    "normalize_background",
+    "pad_to_square",
+    "resize_for_model",
+    "preprocess_dir",
 ]

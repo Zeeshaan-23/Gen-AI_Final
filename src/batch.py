@@ -31,6 +31,7 @@ from src.config import (
     DEFAULT_CONTROLNET_SCALE,
     DEFAULT_CANNY_LOW,
     DEFAULT_CANNY_HIGH,
+    DEFAULT_PREPROCESS,
 )
 from src.prompts import build_prompt, FURNITURE_PRESETS, DEFAULT_NEGATIVE_PROMPT
 
@@ -158,6 +159,7 @@ def run_batch(
     controlnet_scale = float(params.get("controlnet_scale", DEFAULT_CONTROLNET_SCALE))
     canny_low = int(params.get("canny_low", DEFAULT_CANNY_LOW))
     canny_high = int(params.get("canny_high", DEFAULT_CANNY_HIGH))
+    preprocess = bool(params.get("preprocess", DEFAULT_PREPROCESS))
 
     control_path = output_path / "control"
     if use_controlnet:
@@ -202,10 +204,22 @@ def run_batch(
         edited_file = output_path / f"{stem}_edited.png"
         mask_file = masks_path / f"{stem}_mask.png"
         retried = False
+        orig_size = None
+        bg_normalized = False
 
         try:
-            with Image.open(img_file) as raw_img:
-                img = raw_img.convert("RGB")
+            with Image.open(img_file) as probe:
+                orig_size = list(probe.size)
+
+            if preprocess:
+                from src.preprocess import load_and_clean, normalize_background
+                clean_img = load_and_clean(img_file)
+                norm_img = normalize_background(clean_img)
+                bg_normalized = bool(not np.array_equal(np.array(clean_img), np.array(norm_img)))
+                img = norm_img
+            else:
+                with Image.open(img_file) as raw_img:
+                    img = raw_img.convert("RGB")
 
             # 1. Initial Mask Generation
             mask = editor.generate_mask(
@@ -284,6 +298,8 @@ def run_batch(
                 "prompt": spec_prompt,
                 "use_controlnet": use_controlnet,
                 "controlnet_scale": controlnet_scale,
+                "orig_size": orig_size,
+                "bg_normalized": bg_normalized,
             }
 
         except Exception as e:
@@ -299,6 +315,8 @@ def run_batch(
                 "prompt": spec_prompt,
                 "use_controlnet": use_controlnet,
                 "controlnet_scale": controlnet_scale,
+                "orig_size": orig_size,
+                "bg_normalized": bg_normalized,
             }
 
         manifest.append(record)
@@ -366,6 +384,8 @@ def main():
     parser.add_argument("--device", default="cuda", help="Target device (cuda or cpu)")
     parser.add_argument("--controlnet", action="store_true", help="Enable ControlNet structure preservation")
     parser.add_argument("--controlnet-scale", type=float, default=DEFAULT_CONTROLNET_SCALE, help=f"ControlNet conditioning scale (default: {DEFAULT_CONTROLNET_SCALE})")
+    parser.add_argument("--preprocess", dest="preprocess", action="store_true", default=True, help="Run preprocessing (metadata strip, RGBA composite, background normalization) in memory (default: on)")
+    parser.add_argument("--no-preprocess", dest="preprocess", action="store_false", help="Disable in-memory preprocessing before masking")
     parser.add_argument("--zip", action="store_true", help="Create a zip archive of the output directory")
     parser.add_argument("--mock", action="store_true", help="Run with mock engine on CPU without loading models")
 
@@ -411,6 +431,7 @@ def main():
         "mock": args.mock,
         "use_controlnet": args.controlnet,
         "controlnet_scale": args.controlnet_scale,
+        "preprocess": args.preprocess,
     }
 
     manifest = run_batch(

@@ -12,6 +12,7 @@ print("=== 1. Schema Validation ===")
 nbformat.validate(nb)
 print("nbformat validation: PASS (Valid v4 schema)")
 print(f"Total cells: {len(nb.cells)}")
+assert len(nb.cells) == 14, f"Expected 14 cells, got {len(nb.cells)}"
 
 print("\n=== 2. Cell 2 Repo URL Placeholder Verification ===")
 c2_source = "".join(nb.cells[2].source)
@@ -27,31 +28,37 @@ c3_source = "".join(nb.cells[3].source)
 assert "!pip install -q -r requirements.txt" in c3_source
 print("Cell 3 requirements installation: PASS (no conflicting pins)")
 
-print("\n=== 4. Cell 7 Editor Instance Reuse (Colab T4 VRAM hygiene) ===")
-c7_source = "".join(nb.cells[7].source)
-assert '"editor": editor' in c7_source
-print("Cell 7 editor instance reuse: PASS")
+print("\n=== 4. Cell 5 Catalog Image Preprocessing Verification ===")
+c5_source = "".join(nb.cells[5].source)
+assert "preprocess_dir" in c5_source
+assert "data/clean" in c5_source
+print("Cell 5 Preprocessing pipeline & Before/After strip: PASS")
 
-print("\n=== 5. Cell 8 Status Filter Logic ===")
+print("\n=== 5. Cell 8 Editor Instance Reuse (Colab T4 VRAM hygiene) ===")
 c8_source = "".join(nb.cells[8].source)
-assert '"success" in m["status"]' in c8_source
-print("Cell 8 status filter: PASS (includes retried_mask entries)")
+assert '"editor": editor' in c8_source
+print("Cell 8 editor instance reuse: PASS")
 
-print("\n=== 6. Cell 9 ControlNet Batch Run Verification ===")
+print("\n=== 6. Cell 9 Status Filter Logic ===")
 c9_source = "".join(nb.cells[9].source)
-assert '"use_controlnet": True' in c9_source
-assert '"controlnet_scale": 0.8' in c9_source
-print("Cell 9 ControlNet batch execution: PASS")
+assert '"success" in m["status"]' in c9_source
+print("Cell 9 status filter: PASS (includes retried_mask entries)")
 
-print("\n=== 7. Cell 10 ControlNet Compare & Grid Verification ===")
+print("\n=== 7. Cell 10 ControlNet Batch Run Verification ===")
 c10_source = "".join(nb.cells[10].source)
-assert "compare_controlnet" in c10_source
-assert "grid_path" in c10_source
-print("Cell 10 ControlNet comparison pipeline: PASS")
+assert '"use_controlnet": True' in c10_source
+assert '"controlnet_scale": 0.8' in c10_source
+print("Cell 10 ControlNet batch execution: PASS")
 
-print("\n=== 8. Cell 12 Public Gradio Share Verification ===")
-c12_source = "".join(nb.cells[12].source)
-assert "--share" in c12_source
-print("Cell 12 Gradio launch with --share: PASS")
+print("\n=== 8. Cell 11 ControlNet Compare & Grid Verification ===")
+c11_source = "".join(nb.cells[11].source)
+assert "compare_controlnet" in c11_source
+assert "grid_path" in c11_source
+print("Cell 11 ControlNet comparison pipeline: PASS")
+
+print("\n=== 9. Cell 13 Public Gradio Share Verification ===")
+c13_source = "".join(nb.cells[13].source)
+assert "--share" in c13_source
+print("Cell 13 Gradio launch with --share: PASS")
 
 print("\nColab Readiness Overall Status: PASS")

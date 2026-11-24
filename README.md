@@ -24,13 +24,14 @@ A batch product-image editor designed for furniture catalogs. The tool automatic
      ```
    * **Cell 3**: Verifies requirements installation.
    * **Cell 4**: Prepares a sample catalog chair image in `data/input/`.
-   * **Cell 5 & 6**: Runs the smoke test using `CatalogEditor` and visualizes the side-by-side comparison (`Original` vs `Auto-Mask` vs `Inpainted Result`).
-   * **Cell 7**: Runs the batch pipeline across `data/input/`.
-   * **Cell 8**: Displays the batch results grid (Before vs. Mask vs. After).
-   * **Cell 9**: Runs the structure-preserving batch pipeline with ControlNet Canny.
-   * **Cell 10**: Runs `compare_controlnet` and displays the side-by-side 4-column comparison grid and edge-map SSIM metrics.
-   * **Cell 11**: Packages and downloads the output archive.
-   * **Cell 12**: Launches the Gradio web interface with `share=True` for interactive batch editing.
+   * **Cell 5**: Runs the catalog image preprocessing pipeline (`preprocess_dir`) and displays a 4-image Before/After strip (`Raw Input` vs `Cleaned Output`).
+   * **Cell 6 & 7**: Runs the smoke test using `CatalogEditor` and visualizes the side-by-side comparison (`Original` vs `Auto-Mask` vs `Inpainted Result`).
+   * **Cell 8**: Runs the batch pipeline across `data/input/`.
+   * **Cell 9**: Displays the batch results grid (Before vs. Mask vs. After).
+   * **Cell 10**: Runs the structure-preserving batch pipeline with ControlNet Canny.
+   * **Cell 11**: Runs `compare_controlnet` and displays the side-by-side 4-column comparison grid and edge-map SSIM metrics.
+   * **Cell 12**: Packages and downloads the output archive.
+   * **Cell 13**: Launches the Gradio web interface with `share=True` for interactive batch editing.
 
 ---
 
@@ -49,6 +50,7 @@ Gen-AI_Final/
   src/
     __init__.py     # Module exports
     engine.py       # Core inpainting, CLIPSeg segmentation & ControlNet Canny engine
+    preprocess.py   # Catalog image loading, RGBA compositing, background normalization & resizing
     batch.py        # Batch folder processor, mock engine, and manifest writer
     compare.py      # Dual comparison pipeline (without vs with ControlNet) and edge SSIM
     prompts.py      # Spec-aware prompt templates & 12 furniture presets
@@ -60,6 +62,7 @@ Gen-AI_Final/
     test_controlnet.py # ControlNet edge map, manifest & compare tests
     test_engine.py  # Engine padding, clipping, and CPU safety tests
     test_evaluate.py# SSIM evaluation metric tests
+    test_preprocess.py # RGBA composite, padding, background normalization & report tests
     test_prompts.py # Prompt builder & preset validation tests
   notebooks/
     colab_run.ipynb # Google Colab T4 runner & smoke test

@@ -79,3 +79,19 @@ This document outlines the 5 execution phases of CatalogUpdate AI. Each phase in
 - [x] Add Google Colab cells for ControlNet batch execution and comparison grid visualization in `notebooks/colab_run.ipynb`
 
 **Acceptance Criterion**: Code imports cleanly on CPU without model downloads; unit tests and static checks pass; Colab notebook cells execute dual comparisons and demonstrate structure preservation.
+
+---
+
+## Phase 7: Catalog Image Preprocessing Stage
+- [x] Implement `src/preprocess.py` with `load_and_clean` (RGBA transparency composite onto white, EXIF rotation correction, metadata stripping)
+- [x] Implement `normalize_background` (seeded flood-fill to pure white for near-uniform light studio backdrops, tolerance parameter `tol=18`)
+- [x] Implement `pad_to_square` (aspect-ratio-preserving square padding) and `resize_for_model` (512x512)
+- [x] Implement `preprocess_dir` batch pipeline writing cleaned PNGs to output directory and `preprocess_report.csv` (skipping corrupt/unreadable files)
+- [x] Add preprocessing CLI: `python -m src.preprocess --input data/input --output data/clean`
+- [x] Integrate in-memory preprocessing into `src/batch.py` with `--preprocess` flag (default on) and record `orig_size` and `bg_normalized` in `manifest.json`
+- [x] Preserve output geometry at cleaned image size and update `src/evaluate.py` to evaluate outside-mask SSIM against cleaned images
+- [x] Implement comprehensive unit tests in `tests/test_preprocess.py` covering RGBA composite, square padding, corrupt file skipping, CSV report rows, and batch integration
+- [x] Add Google Colab cell (Cell 5) executing `preprocess_dir` and rendering a 4-image Before/After strip (Raw Input vs. Cleaned & White-Normalized)
+- [x] Update documentation and notebook validation assertions
+
+**Acceptance Criterion**: Preprocessing CLI runs on CPU; corrupt files are skipped without crash; unmasked SSIM compares against cleaned images; unit tests pass with zero errors.

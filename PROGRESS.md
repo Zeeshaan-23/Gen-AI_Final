@@ -303,3 +303,36 @@ All dates are logged in local time (UTC+05:30).
   - Run verification, commit, and push.
 - **Known issues / COLAB-ONLY**:
   - Local workstation has no GPU; model inference is tested via the mock engine on CPU and verified offline. Real ControlNet weights download and CUDA FP16 inpainting inference require Google Colab T4 GPU (marked COLAB-ONLY).
+
+---
+
+### [2026-11-24 22:25] - Add Explicit Catalog Image Preprocessing Stage (Phase 7)
+- **What was done**:
+  - Implemented `src/preprocess.py`:
+    * `load_and_clean`: handles WebP, PNG, JPG, and RGBA images by compositing transparent pixels over a solid white background, resolving EXIF rotation (`ImageOps.exif_transpose`), and stripping non-essential metadata.
+    * `normalize_background`: detects near-uniform light catalog studio backdrops (average border brightness >= 200, std <= tol * 1.5) and flood-fills them to pure white (255, 255, 255) using perimeter seeds, leaving non-light or textured backgrounds completely untouched.
+    * `pad_to_square` and `resize_for_model`: preserves furniture proportions by centering rectangular images within a neutral white square canvas before model ingestion.
+    * `preprocess_dir`: offline batch pipeline saving standardized PNGs to output directory, skipping corrupted/unreadable files with warning logs, and generating `preprocess_report.csv`.
+    * Preprocessing CLI: `python -m src.preprocess --input data/input --output data/clean`.
+  - Integrated in-memory preprocessing into `src/batch.py` enabled via `--preprocess` (default on), recording `orig_size` and `bg_normalized` in `manifest.json`.
+  - Preserved output geometry: edited images are returned at cleaned dimensions, and `src/evaluate.py` outside-mask SSIM now compares against the cleaned image to eliminate shape and channel mismatches.
+  - Added test suite `tests/test_preprocess.py` (6 test cases covering RGBA compositing, square padding, corrupt file skipping, CSV report rows, background normalization, and batch integration).
+  - Added Google Colab cell (Cell 5) in `notebooks/colab_run.ipynb` executing preprocessing and displaying a 4-image before/after strip (`Raw Input` vs `Cleaned Output`).
+  - Updated `scripts/validate_colab.py` with schema and cell verification for 14 cells.
+- **Files touched**:
+  - `src/preprocess.py` (new)
+  - `src/config.py`
+  - `src/__init__.py`
+  - `src/batch.py`
+  - `src/evaluate.py`
+  - `tests/test_preprocess.py` (new)
+  - `notebooks/colab_run.ipynb`
+  - `scripts/validate_colab.py`
+  - `DECISIONS.md`
+  - `PLAN.md`
+  - `PROGRESS.md`
+- **What is next**:
+  - Update README.md, PROJECT.md, and DEMO.md.
+  - Run static checks and pytest.
+- **Known issues / COLAB-ONLY**:
+  - Preprocessing and batch mock pipelines run offline on local CPU. Neural inpainting inference requires Google Colab T4 GPU.

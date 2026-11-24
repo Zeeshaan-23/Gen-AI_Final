@@ -110,10 +110,13 @@ def evaluate_run(
 
         outside_ssim = 1.0
         if "success" in status and output_file and Path(output_file).exists() and orig_file.exists():
-            orig_img = Image.open(orig_file)
+            from src.preprocess import load_and_clean, normalize_background
+            clean_img = load_and_clean(orig_file)
+            if item.get("bg_normalized", False):
+                clean_img = normalize_background(clean_img)
             edit_img = Image.open(output_file)
-            mask_img = Image.open(mask_file) if mask_file.exists() else Image.new("L", orig_img.size, 0)
-            outside_ssim = round(ssim_outside_mask(orig_img, edit_img, mask_img), 4)
+            mask_img = Image.open(mask_file) if mask_file.exists() else Image.new("L", clean_img.size, 0)
+            outside_ssim = round(ssim_outside_mask(clean_img, edit_img, mask_img), 4)
 
         rec = {
             "name": name,

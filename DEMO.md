@@ -16,16 +16,32 @@ Google Colab provides a free 16GB Nvidia T4 GPU, which is the target production 
    - **Cell 2**: Clones `https://github.com/Zeeshaan-23/Gen-AI_Final.git` and installs pinned requirements.
    - **Cell 3**: Verifies imports and environment setup.
    - **Cell 4**: Prepares a sample catalog chair image in `data/input/sample_chair.png`.
-   - **Cell 5 & 6**: Executes a single-image smoke test (`chair legs` -> `walnut wood`) and renders a side-by-side comparison (`Original` vs. `Auto-Mask` vs. `Inpainted Result`).
-   - **Cell 7 & 8**: Runs the batch pipeline across `data/input/` and displays the before/mask/after comparison grid.
-   - **Cell 9**: Runs the batch pipeline with ControlNet structure preservation (`--controlnet`, `--controlnet-scale 0.8`).
-   - **Cell 10**: Runs comparative evaluation (`python -m src.compare`) rendering a 4-column visual comparison grid (`Original | Mask | Without ControlNet | With ControlNet`) and reporting edge-map SSIM metrics.
-   - **Cell 11**: Zips all outputs into a downloadable archive.
-   - **Cell 12**: Launches the interactive Gradio web application with a public `gradio.live` link.
+   - **Cell 5**: Executes catalog image preprocessing (`preprocess_dir`) across diverse sample formats (RGB, transparent RGBA, off-white studio tint, rectangular) and renders a 4-image Before/After strip.
+   - **Cell 6 & 7**: Executes a single-image smoke test (`chair legs` -> `walnut wood`) and renders a side-by-side comparison (`Original` vs. `Auto-Mask` vs. `Inpainted Result`).
+   - **Cell 8 & 9**: Runs the batch pipeline across `data/input/` and displays the before/mask/after comparison grid.
+   - **Cell 10**: Runs the batch pipeline with ControlNet structure preservation (`--controlnet`, `--controlnet-scale 0.8`).
+   - **Cell 11**: Runs comparative evaluation (`python -m src.compare`) rendering a 4-column visual comparison grid (`Original | Mask | Without ControlNet | With ControlNet`) and reporting edge-map SSIM metrics.
+   - **Cell 12**: Zips all outputs into a downloadable archive.
+   - **Cell 13**: Launches the interactive Gradio web application with a public `gradio.live` link.
 
 ---
 
-## 2. Running the Batch CLI Locally (CPU / Mock Mode)
+## 2. Running the Catalog Image Preprocessing CLI
+
+To sanitize and standardize raw vendor catalog images before inpainting (composites RGBA transparency onto pure white, corrects EXIF orientation, strips metadata, and normalizes off-white backdrops):
+
+```bash
+# Preprocess directory of raw images
+python -m src.preprocess --input data/input --output data/clean --size 1024 --tol 18
+```
+
+### Outputs Generated:
+- `data/clean/<name>.png`: Cleaned, standardized 3-channel RGB PNG images with pure white backgrounds.
+- `data/clean/preprocess_report.csv`: Manifest detailing `name`, `orig_size`, `new_size`, `bg_normalized`, and `status` per image. Faulty or corrupted files are skipped and flagged without crashing.
+
+---
+
+## 3. Running the Batch CLI Locally (CPU / Mock Mode)
 
 For development, testing, and continuous integration on machines without a dedicated GPU, CatalogUpdate AI includes a lightweight `MockCatalogEditor` that simulates inpainting without downloading multi-gigabyte models.
 
@@ -59,7 +75,7 @@ python -m src.batch \
 
 ---
 
-## 3. Running Comparative Evaluation (With vs. Without ControlNet)
+## 4. Running Comparative Evaluation (With vs. Without ControlNet)
 
 To objectively evaluate the impact of ControlNet edge guidance on geometric consistency:
 
@@ -81,7 +97,7 @@ On GPU (e.g., Colab T4), omit `--mock` to run full neural inference.
 
 ---
 
-## 4. Running the Gradio Web Application Locally
+## 5. Running the Gradio Web Application Locally
 
 The Gradio web interface provides a dual-tab experience:
 1. **Tab 1 ("Batch Catalog Update")**: Multi-image drag-and-drop upload, part and spec textboxes, preset dropdowns, ControlNet toggle and strength slider, advanced diffusion tuning accordion, edge map preview gallery, and downloadable ZIP output.
@@ -104,12 +120,12 @@ Open `http://127.0.0.1:7860` in any web browser.
 
 ---
 
-## 5. Running the Test Suite & Static Analysis
+## 6. Running the Test Suite & Static Analysis
 
 All tests run cleanly on local CPU without model downloads:
 
 ```bash
-# Run unit tests (19 test cases covering batch, engine, prompts, evaluate, and controlnet)
+# Run unit tests (25 test cases covering batch, engine, prompts, evaluate, controlnet, and preprocess)
 pytest -q
 
 # Run static analysis

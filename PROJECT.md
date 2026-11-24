@@ -8,10 +8,10 @@ CatalogUpdate AI is a batch product-image editor designed specifically for furni
 ## 2. Architecture & Workflow
 
 ### 2.1 Core Pipeline
-1. **Input Ingestion**: Ingests product catalog photos (`data/input/` or uploaded via UI) along with a spec change request (target part description + replacement material spec).
+1. **Catalog Preprocessing**: Ingests raw product photos (`data/input/` or uploaded via UI), handles RGBA transparency by compositing onto pure white, fixes EXIF orientation rotations, strips metadata, and normalizes near-uniform light studio backdrops to pure white via seeded flood-filling.
 2. **Text-Prompted Auto-Masking**: Uses `CIDAS/clipseg-rd64-refined` to generate a probability heatmap of the target furniture part from the text prompt, followed by thresholding and morphological dilation to produce a clean binary mask.
-3. **Spec Inpainting**: Feeds the original image, generated mask, and a spec-aware positive/negative prompt into `stable-diffusion-v1-5/stable-diffusion-inpainting` (running in FP16 on GPU).
-4. **Output Generation & Manifest**: Saves modified images to `data/output/` and logs metadata, prompts, timestamps, and status into a results manifest (`manifest.json` / `manifest.csv`).
+3. **Spec Inpainting**: Feeds the cleaned image, generated mask, and a spec-aware positive/negative prompt into `stable-diffusion-v1-5/stable-diffusion-inpainting` (running in FP16 on GPU), with optional ControlNet Canny edge guidance.
+4. **Output Generation & Manifest**: Saves modified images to `data/output/` and logs metadata, prompts, timestamps, original size, background normalization status, and status into a results manifest (`manifest.json` / `manifest.csv`).
 
 ### 2.2 Dual Interface
 - **Batch Processing Tab**: High-throughput processing for directories of catalog imagery with preset material selection and automated manifest generation.
@@ -64,6 +64,7 @@ Gen-AI_Final/
   src/
     __init__.py
     engine.py
+    preprocess.py
     batch.py
     compare.py
     prompts.py
@@ -75,6 +76,7 @@ Gen-AI_Final/
     test_controlnet.py
     test_engine.py
     test_evaluate.py
+    test_preprocess.py
     test_prompts.py
   notebooks/
     colab_run.ipynb

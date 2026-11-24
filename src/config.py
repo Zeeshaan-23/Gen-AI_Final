@@ -28,6 +28,11 @@ DEFAULT_CONTROLNET_SCALE: float = 0.8
 DEFAULT_CANNY_LOW: int = 100
 DEFAULT_CANNY_HIGH: int = 200
 
+# Preprocessing Hyperparameters
+DEFAULT_PREPROCESS: bool = True
+DEFAULT_PREPROCESS_TOL: int = 18
+DEFAULT_PREPROCESS_SIZE: int = 1024
+
 # Model Identifiers
 INPAINT_MODEL_ID: str = "stable-diffusion-v1-5/stable-diffusion-inpainting"
 CLIPSEG_MODEL_ID: str = "CIDAS/clipseg-rd64-refined"

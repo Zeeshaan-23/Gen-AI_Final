@@ -15,9 +15,12 @@ print(f"Total cells: {len(nb.cells)}")
 
 print("\n=== 2. Cell 2 Repo URL Placeholder Verification ===")
 c2_source = "".join(nb.cells[2].source)
-assert 'REPO_URL = "https://github.com/<YOUR_GITHUB_USERNAME>/catalogupdate-ai.git"' in c2_source
-print("Cell 2 REPO_URL placeholder: PASS")
-print("  Line found: REPO_URL = \"https://github.com/<YOUR_GITHUB_USERNAME>/catalogupdate-ai.git\"")
+assert "!git clone https://github.com/Zeeshaan-23/Gen-AI_Final.git" in c2_source
+assert "%cd Gen-AI_Final" in c2_source
+assert "!pip install -q -r requirements.txt" in c2_source
+print("Cell 2 clone and dependencies installation: PASS")
+print("  Line found: !git clone https://github.com/Zeeshaan-23/Gen-AI_Final.git")
+print("  Line found: %cd Gen-AI_Final")
 
 print("\n=== 3. Cell 3 Dependency Installation Verification ===")
 c3_source = "".join(nb.cells[3].source)

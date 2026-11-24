@@ -1,18 +1,27 @@
-import sys
-import importlib.util
-from pathlib import Path
+"""
+CatalogUpdate AI - Global Configuration & Default Tuning Parameters.
 
-_target_path = Path(__file__).resolve().parent.parent / "catalogupdate-ai" / "src" / "config.py"
-_spec = importlib.util.spec_from_file_location("_catalogupdate_config", _target_path)
-_mod = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_mod)
+Centralizes all default hyperparameters for segmentation, inpainting,
+aspect ratio padding, and batch execution.
+"""
 
-DEFAULT_STEPS = _mod.DEFAULT_STEPS
-DEFAULT_GUIDANCE = _mod.DEFAULT_GUIDANCE
-DEFAULT_STRENGTH = _mod.DEFAULT_STRENGTH
-DEFAULT_SEED = _mod.DEFAULT_SEED
-DEFAULT_MASK_THRESHOLD = _mod.DEFAULT_MASK_THRESHOLD
-DEFAULT_RETRY_MASK_THRESHOLD = _mod.DEFAULT_RETRY_MASK_THRESHOLD
-DEFAULT_MASK_DILATION_PX = _mod.DEFAULT_MASK_DILATION_PX
-DEFAULT_MASK_BLUR_RADIUS = _mod.DEFAULT_MASK_BLUR_RADIUS
-MIN_MASK_COVERAGE_PCT = _mod.MIN_MASK_COVERAGE_PCT
+from typing import Tuple
+
+# Inpainting & Diffusion Hyperparameters
+DEFAULT_STEPS: int = 30
+DEFAULT_GUIDANCE: float = 7.5
+DEFAULT_STRENGTH: float = 1.0
+DEFAULT_SEED: int = 42
+INPAINT_SIZE: Tuple[int, int] = (512, 512)
+PADDING_COLOR: Tuple[int, int, int] = (255, 255, 255)
+
+# Segmentation & Auto-Masking Hyperparameters
+DEFAULT_MASK_THRESHOLD: float = 0.4
+DEFAULT_RETRY_MASK_THRESHOLD: float = 0.2  # Sensitive fallback threshold for thin/angled components
+DEFAULT_MASK_DILATION_PX: int = 12
+DEFAULT_MASK_BLUR_RADIUS: int = 2
+MIN_MASK_COVERAGE_PCT: float = 0.5  # Percentage of image area below which mask is considered absent
+
+# Model Identifiers
+INPAINT_MODEL_ID: str = "stable-diffusion-v1-5/stable-diffusion-inpainting"
+CLIPSEG_MODEL_ID: str = "CIDAS/clipseg-rd64-refined"

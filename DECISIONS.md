@@ -64,3 +64,46 @@ The following optimal defaults were calibrated for furniture catalog inpainting:
 
 8. **Random Seed Reproducibility (`seed = 42`)**:
    - Reusing a fixed random seed across all images in a batch guarantees consistent wood grain tones, metal sheen, and fabric weave patterns across different angles of the same furniture line.
+
+---
+
+## Duplicate Resolution & Repository Cleanup (Phase 5 Clean-Up)
+During repository audit and reorganization from the nested `catalogupdate-ai/` layout to the clean root layout `Gen-AI_Final/`, duplicate files existed between the root and `catalogupdate-ai/`. Every duplicate was diffed and resolved as follows:
+
+1. **`app.py`**:
+   - *Root version*: Minimal 21-line forwarder importing `catalogupdate-ai.app`.
+   - *catalogupdate-ai version*: Authoritative 20KB implementation containing full dual-tab Gradio Blocks UI (Batch + Single Image manual brush mask), `USE_MOCK_ENGINE` support, layer extraction, progress handling, and Colab share link detection.
+   - *Decision*: Kept `catalogupdate-ai/app.py` and moved to root `app.py`.
+
+2. **`src/__init__.py`**:
+   - *Root version*: Minimal exports.
+   - *catalogupdate-ai version*: Complete exports (`CatalogEditor`, `run_batch`, `zip_outputs`, `build_prompt`, `FURNITURE_PRESETS`, `evaluate_pair`, `evaluate_batch`).
+   - *Decision*: Kept `catalogupdate-ai/src/__init__.py` -> `src/__init__.py`.
+
+3. **`src/batch.py`**:
+   - *Root version*: Basic 89-line script without retry or mock support.
+   - *catalogupdate-ai version*: 15KB robust batch processing pipeline with automatic mask retry (<0.5% coverage recovery), `MockCatalogEditor` for CPU testing, CLI argument parsing, manifest generation, and ZIP packaging.
+   - *Decision*: Kept `catalogupdate-ai/src/batch.py` -> `src/batch.py`.
+
+4. **`src/config.py`**:
+   - *Root version*: Missing or incomplete defaults.
+   - *catalogupdate-ai version*: Centralized hyperparameter configuration (`DEFAULT_STEPS=30`, `DEFAULT_GUIDANCE=7.5`, `DEFAULT_MASK_THRESHOLD=0.4`, `DEFAULT_RETRY_MASK_THRESHOLD=0.2`, `DEFAULT_MASK_DILATION_PX=12`, etc.).
+   - *Decision*: Kept `catalogupdate-ai/src/config.py` -> `src/config.py`.
+
+5. **`src/engine.py`**:
+   - *Root version*: Basic 68-line engine without device fallbacks or paste-back pixel preservation.
+   - *catalogupdate-ai version*: 11KB audit-hardened engine featuring FP16 VAE upcast (prevents black image artifacts), attention slicing, aspect ratio padding, lazy model loading, and strict alpha paste-back ensuring unmasked pixels remain 100% identical.
+   - *Decision*: Kept `catalogupdate-ai/src/engine.py` -> `src/engine.py`.
+
+6. **`src/prompts.py`**:
+   - *Root version*: Partial prompt builder.
+   - *catalogupdate-ai version*: Full spec-aware prompt engineering with 12 furniture presets and negative prompts.
+   - *Decision*: Kept `catalogupdate-ai/src/prompts.py` -> `src/prompts.py`.
+
+7. **Tracking and Documentation Files (`PROJECT.md`, `PLAN.md`, `PROGRESS.md`, `DECISIONS.md`, `README.md`)**:
+   - *Root versions*: Older scaffolds.
+   - *catalogupdate-ai versions*: Complete progress logs, technical decisions, tuning notes, and phase documentation.
+   - *Decision*: Moved `catalogupdate-ai` files to repository root.
+
+8. **Caches, Bytecode, and Generated Artifacts**:
+   - Untracked and removed all `.pyc` files, `__pycache__/` directories, `.pytest_cache/`, `*.zip` archives, and generated output images from git. Updated `.gitignore` to prevent future tracking.

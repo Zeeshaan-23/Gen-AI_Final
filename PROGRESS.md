@@ -222,3 +222,34 @@ All dates are logged in local time (UTC+05:30).
   - `PROGRESS.md`
 - **Known issues / Colab-only**:
   - Local tests run offline with `USE_MOCK_ENGINE=1`. Actual model weights download and CUDA FP16 inpainting inference require Google Colab T4 GPU.
+
+---
+
+### [2026-11-24 14:15] - Repository Cleanup & Consolidation (Push-Ready State)
+- **What was done**:
+  - Reorganized repository from nested `catalogupdate-ai/` layout into a single, clean root structure `Gen-AI_Final/`.
+  - Analyzed and resolved all duplicate files between repository root and `catalogupdate-ai/`, preserving the audit-hardened, comprehensive versions.
+  - Removed all tracked bytecode caches (`__pycache__`, `*.pyc`), `.pytest_cache`, generated zip archives, and test output images using `git rm --cached`.
+  - Updated `.gitignore` to comprehensively ignore caches, virtual environments, model weights, and generated output files while preserving `.gitkeep`.
+  - Updated `notebooks/colab_run.ipynb` Cell 2 to directly clone `https://github.com/Zeeshaan-23/Gen-AI_Final.git` and `%cd Gen-AI_Final`.
+  - Updated `README.md` and `PROJECT.md` directory trees and Colab run instructions to reflect the consolidated structure.
+  - Created `DEMO.md` with step-by-step guides for Colab T4, local CLI mock testing, and Gradio web interface.
+  - Updated `scripts/validate_colab.py` assertions for the new Colab clone command.
+  - Documented duplicate resolution decisions in `DECISIONS.md` and updated `PLAN.md` Phase 5 checklist.
+  - Executed static checks (`pyflakes`), unit tests (`pytest`), notebook schema validation (`nbformat`), and mock batch pipeline run; captured clean output log in `verification/logs/cleanup_after.txt`.
+- **Files touched**:
+  - `notebooks/colab_run.ipynb`
+  - `README.md`
+  - `PROJECT.md`
+  - `PLAN.md`
+  - `DECISIONS.md`
+  - `PROGRESS.md`
+  - `DEMO.md`
+  - `tests/conftest.py`
+  - `scripts/validate_colab.py`
+  - `.gitignore`
+  - `verification/logs/cleanup_after.txt`
+- **What is next**:
+  - Ready for single clean git commit.
+- **Known issues**:
+  - Local workstation is CPU-only; full diffusion GPU inference is intended for Google Colab T4.

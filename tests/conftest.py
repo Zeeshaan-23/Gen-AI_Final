@@ -1,5 +1,5 @@
 """
-Pytest configuration and shared fixtures for catalogupdate-ai test suite.
+Pytest configuration and shared fixtures for CatalogUpdate AI test suite.
 """
 
 import pytest

@@ -1,0 +1,148 @@
+============================================================
+CatalogUpdate AI - Step 7 Cleanup & Verification Log
+Timestamp: 2026-11-24 14:18:58
+============================================================
+
+--- CHECK 1: Clean Imports ---
+$ python -c "import src.engine, src.batch, src.prompts, src.evaluate, app; print('Clean import: PASS')"
+Clean import: PASS
+2026-11-24 14:19:12,005 [INFO] HTTP Request: HEAD https://huggingface.co/api/telemetry/https%3A/api.gradio.app/gradio-initiated-analytics "HTTP/1.1 200 OK"
+2026-11-24 14:19:12,687 [INFO] HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+Exit code: 0
+
+--- CHECK 2: Static Analysis (Pyflakes) ---
+$ python -m pyflakes app.py src tests scripts
+Exit code: 0
+Pyflakes static analysis: PASS (0 errors)
+
+--- CHECK 3: Unit Tests (pytest) ---
+$ pytest -q
+.............                                                            [100%]
+============================== warnings summary ===============================
+C:\Users\Zeeshaan\AppData\Roaming\Python\Python314\site-packages\anyio\pytest_plugin.py:14
+  C:\Users\Zeeshaan\AppData\Roaming\Python\Python314\site-packages\anyio\pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+13 passed, 1 warning in 1.25s
+Exit code: 0
+
+--- CHECK 4: Colab Notebook Schema & Setup Validation ---
+$ python -c "import nbformat; nb = nbformat.read('notebooks/colab_run.ipynb', as_version=4); nbformat.validate(nb); print('Notebook schema valid: PASS')"
+Notebook schema valid: PASS
+Exit code: 0
+$ python scripts/validate_colab.py
+=== 1. Schema Validation ===
+nbformat validation: PASS (Valid v4 schema)
+Total cells: 11
+
+=== 2. Cell 2 Repo URL Placeholder Verification ===
+Cell 2 clone and dependencies installation: PASS
+  Line found: !git clone https://github.com/Zeeshaan-23/Gen-AI_Final.git
+  Line found: %cd Gen-AI_Final
+
+=== 3. Cell 3 Dependency Installation Verification ===
+Cell 3 requirements installation: PASS (no conflicting pins)
+
+=== 4. Cell 7 Editor Instance Reuse (Colab T4 VRAM hygiene) ===
+Cell 7 editor instance reuse: PASS
+
+=== 5. Cell 8 Status Filter Logic ===
+Cell 8 status filter: PASS (includes retried_mask entries)
+
+=== 6. Cell 10 Public Gradio Share Verification ===
+Cell 10 Gradio launch with --share: PASS
+
+Colab Readiness Overall Status: PASS
+Exit code: 0
+
+--- CHECK 5: Mock Batch CLI Run ---
+$ python -m src.batch --input data/input --output data/output_test --part "chair legs" --prompt "walnut wood" --mock
+Batch finished successfully. 1 items logged in manifest.json.
+2026-11-24 14:19:21,644 [INFO] Found 1 images in D:\College\Sem 5\GenAI\Project\data\input to process.
+2026-11-24 14:19:21,690 [INFO] [1/1] sample_chair.png: Successfully edited (success, coverage: 4.13%)
+2026-11-24 14:19:21,704 [INFO] Batch completed. Manifest saved to D:\College\Sem 5\GenAI\Project\data\output_test\manifest.json
+Exit code: 0
+Generated files in data/output_test:
+  data\output_test\manifest.json (290 bytes)
+  data\output_test\masks\sample_chair_mask.png (546 bytes)
+  data\output_test\sample_chair_edited.png (2089 bytes)
+Cleaned up data/output_test: PASS
+
+--- CHECK 6: Git Status Check ---
+$ git status --short
+RM catalogupdate-ai/.gitignore -> .gitignore
+RM catalogupdate-ai/DECISIONS.md -> DECISIONS.md
+RM catalogupdate-ai/PLAN.md -> PLAN.md
+RM catalogupdate-ai/PROGRESS.md -> PROGRESS.md
+RM catalogupdate-ai/PROJECT.md -> PROJECT.md
+RM catalogupdate-ai/README.md -> README.md
+D  __pycache__/app.cpython-314.pyc
+M  app.py
+D  catalogupdate-ai/app.py
+D  catalogupdate-ai/data/output_archive.zip
+D  catalogupdate-ai/data/test_output/chair_01_edited.png
+D  catalogupdate-ai/data/test_output/chair_02_edited.png
+D  catalogupdate-ai/data/test_output/chair_03_edited.png
+D  catalogupdate-ai/data/test_output/manifest.json
+D  catalogupdate-ai/data/test_output/masks/chair_01_mask.png
+D  catalogupdate-ai/data/test_output/masks/chair_02_mask.png
+D  catalogupdate-ai/data/test_output/masks/chair_03_mask.png
+D  catalogupdate-ai/data/test_output_archive.zip
+D  catalogupdate-ai/src/__init__.py
+D  catalogupdate-ai/src/batch.py
+D  catalogupdate-ai/src/config.py
+D  catalogupdate-ai/src/engine.py
+D  catalogupdate-ai/src/prompts.py
+R  catalogupdate-ai/data/input/.gitkeep -> data/input/.gitkeep
+R  catalogupdate-ai/data/input/sample_chair.png -> data/input/sample_chair.png
+R  catalogupdate-ai/data/output/.gitkeep -> data/output/.gitkeep
+R  catalogupdate-ai/data/test_input/chair_01.png -> data/test_input/chair_01.png
+R  catalogupdate-ai/data/test_input/chair_02.png -> data/test_input/chair_02.png
+R  catalogupdate-ai/data/test_input/chair_03.png -> data/test_input/chair_03.png
+RM catalogupdate-ai/notebooks/colab_run.ipynb -> notebooks/colab_run.ipynb
+R  catalogupdate-ai/pytest.ini -> pytest.ini
+R  catalogupdate-ai/requirements.txt -> requirements.txt
+RM catalogupdate-ai/scripts/validate_colab.py -> scripts/validate_colab.py
+R  catalogupdate-ai/scripts/verify_ui.py -> scripts/verify_ui.py
+M  src/__init__.py
+D  src/__pycache__/__init__.cpython-314.pyc
+D  src/__pycache__/batch.cpython-314.pyc
+D  src/__pycache__/engine.cpython-314.pyc
+D  src/__pycache__/prompts.cpython-314.pyc
+M  src/batch.py
+M  src/config.py
+M  src/engine.py
+R  catalogupdate-ai/src/evaluate.py -> src/evaluate.py
+M  src/prompts.py
+RM catalogupdate-ai/tests/conftest.py -> tests/conftest.py
+R  catalogupdate-ai/tests/test_batch.py -> tests/test_batch.py
+R  catalogupdate-ai/tests/test_engine.py -> tests/test_engine.py
+R  catalogupdate-ai/tests/test_evaluate.py -> tests/test_evaluate.py
+R  catalogupdate-ai/tests/test_prompts.py -> tests/test_prompts.py
+R  catalogupdate-ai/verification/VERIFICATION.md -> verification/VERIFICATION.md
+R  catalogupdate-ai/verification/logs/01_file_tree.txt -> verification/logs/01_file_tree.txt
+R  catalogupdate-ai/verification/logs/02_install_requirements.txt -> verification/logs/02_install_requirements.txt
+R  catalogupdate-ai/verification/logs/03_clean_import.txt -> verification/logs/03_clean_import.txt
+R  catalogupdate-ai/verification/logs/04_static_checks.txt -> verification/logs/04_static_checks.txt
+R  catalogupdate-ai/verification/logs/05_unit_tests.txt -> verification/logs/05_unit_tests.txt
+R  catalogupdate-ai/verification/logs/06_cli_help.txt -> verification/logs/06_cli_help.txt
+R  catalogupdate-ai/verification/logs/06_cli_mock_run.txt -> verification/logs/06_cli_mock_run.txt
+R  catalogupdate-ai/verification/logs/07_ui_verification.txt -> verification/logs/07_ui_verification.txt
+R  catalogupdate-ai/verification/logs/08_colab_readiness.txt -> verification/logs/08_colab_readiness.txt
+R  catalogupdate-ai/verification/screenshots/01_tab1_empty.png -> verification/screenshots/01_tab1_empty.png
+R  catalogupdate-ai/verification/screenshots/02_tab1_batch_results.png -> verification/screenshots/02_tab1_batch_results.png
+R  catalogupdate-ai/verification/screenshots/03_tab2_editor.png -> verification/screenshots/03_tab2_editor.png
+R  catalogupdate-ai/verification/screenshots/04_tab1_error_no_images.png -> verification/screenshots/04_tab1_error_no_images.png
+?? DEMO.md
+?? scripts/run_cleanup_checks.py
+?? verification/logs/cleanup_after.txt
+?? verification/logs/cleanup_before.txt
+Exit code: 0
+
+============================================================
+ALL VERIFICATION CHECKS PASSED
+============================================================

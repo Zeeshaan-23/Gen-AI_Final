@@ -50,13 +50,15 @@ CatalogUpdate AI is a batch product-image editor designed specifically for furni
 
 ## 6. Repository Structure
 ```
-catalogupdate-ai/
+Gen-AI_Final/
   PROJECT.md
   PLAN.md
   PROGRESS.md
   DECISIONS.md
+  DEMO.md
   README.md
   requirements.txt
+  .gitignore
   app.py
   src/
     __init__.py
@@ -64,9 +66,20 @@ catalogupdate-ai/
     batch.py
     prompts.py
     evaluate.py
+    config.py
+  tests/
+    conftest.py
+    test_batch.py
+    test_engine.py
+    test_evaluate.py
+    test_prompts.py
   notebooks/
     colab_run.ipynb
   data/
     input/
     output/
+  verification/
+    VERIFICATION.md
+    logs/
+    screenshots/
 ```

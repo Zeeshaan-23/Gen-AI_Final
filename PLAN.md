@@ -58,9 +58,9 @@ This document outlines the 5 execution phases of CatalogUpdate AI. Each phase in
 ---
 
 ## Phase 5: Evaluation (SSIM Outside Mask, Results Grid), README, Demo Script
-- [ ] Implement `src/evaluate.py` to compute Structural Similarity Index (SSIM) exclusively on unmasked pixels between original and output images
-- [ ] Build visualization utility in `src/evaluate.py` to generate side-by-side comparison grids (Original, Auto-Mask, Inpainted Result)
-- [ ] Create a lightweight demo verification script (`demo.py` or sample runner)
-- [ ] Write detailed `README.md` covering project overview, architecture, quickstart, Colab instructions, and sample outputs
+- [x] Implement `src/evaluate.py` to compute Structural Similarity Index (SSIM) exclusively on unmasked pixels between original and output images
+- [x] Build visualization utility in `src/evaluate.py` to generate side-by-side comparison grids (Original, Auto-Mask, Inpainted Result)
+- [x] Create a lightweight demo verification script (`demo.py` or sample runner) / `DEMO.md`
+- [x] Write detailed `README.md` covering project overview, architecture, quickstart, Colab instructions, and sample outputs
 
 **Acceptance Criterion**: SSIM evaluation script validates background preservation on sample pairs, side-by-side comparison grids are generated, and README provides end-to-end instructions for reproducing results.

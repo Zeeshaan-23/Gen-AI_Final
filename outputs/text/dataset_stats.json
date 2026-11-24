@@ -1,0 +1,11 @@
+{
+  "num_raw_lines": 492,
+  "num_clean_lines": 459,
+  "vocab_size": 31,
+  "total_characters": 29877,
+  "num_sequences": 9946,
+  "train_sequences": 8952,
+  "val_sequences": 994,
+  "seq_len": 40,
+  "stride": 3
+}

@@ -1,0 +1,151 @@
+seed,temperature,sample_idx,generated_text,format_valid,vocab_validity,relevant,duplicate_of_train,score
+Update: chair legs changed to,0.5,1,Update: chair legs changed to matte finish.,1,1.0,0,0,3.2
+Update: chair legs changed to,0.5,2,"Update: chair legs changed to sand dark wood, goldle, oiled finish.",1,0.9091,1,0,5.064
+Update: chair legs changed to,0.5,3,"Update: chair legs changed to white cherry wood, glossy finish.",1,1.0,1,0,5.2
+Update: chair legs changed to,0.5,4,"Update: chair legs changed to charcoal linen in charcoal walnut, satin finish.",1,1.0,1,0,5.2
+Update: chair legs changed to,0.5,5,"Update: chair legs changed to charcoal walnut with brushed brass, satin finish.",1,1.0,1,0,5.2
+Update: chair legs changed to,0.5,6,"Update: chair legs changed to charcoal walnut with oak, brushed brass, satin finish.",1,1.0,1,0,5.2
+Update: chair legs changed to,0.5,7,Update: chair legs changed to boucle with oak with glossy finish.,1,1.0,1,0,5.2
+Update: chair legs changed to,0.5,8,"Update: chair legs changed to charcoal cherry wood, matte finish.",1,1.0,1,0,5.2
+Update: chair legs changed to,0.5,9,"Update: chair legs changed to charcoal rattan with emerald dark wood, oiled finish.",1,1.0,1,0,5.2
+Update: chair legs changed to,0.5,10,"Update: chair legs changed to charcoal marble, glossy finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.5,1,"Update: sofa cushions updated to charcoal dark wood, textured finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.5,2,"Update: sofa cushions updated to charcoal cherry wood, glossy finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.5,3,"Update: sofa cushions updated to beige walnut with brushed brass, satin finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.5,4,"Update: sofa cushions updated to boucle in warm brown walnut, oiled finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.5,5,"Update: sofa cushions updated to charcoal cherry wood, glossy finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.5,6,Update: sofa cushions updated to charcoal walnut with satin finish.,1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.5,7,"Update: sofa cushions updated to emerald dark wood, glossy finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.5,8,Update: sofa cushions updated to charcoal walnut.,1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.5,9,"Update: sofa cushions updated to emerald boucle, glossy finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.5,10,"Update: sofa cushions updated to navy blue walnut, polished finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.5,1,Update: table top modified to boucle with glossy finish.,1,1.0,1,0,5.2
+Update: table top modified to,0.5,2,"Update: table top modified to charcoal wood, polished finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.5,3,"Update: table top modified to charcoal linen, oiled finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.5,4,"Update: table top modified to charcoal dark wood, brushed finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.5,5,"Update: table top modified to charcoal walnut, polished finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.5,6,"Update: table top modified to charcoal linen with brushed brass, textured finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.5,7,"Update: table top modified to oak with oak, glossy finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.5,8,"Update: table top modified to charcoal marble, textured finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.5,9,"Update: table top modified to charcoal cherry wood, textured finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.5,10,Update: table top modified to boucle with matte finish.,1,1.0,1,0,5.2
+Change: replace armrests with,0.5,1,Change: replace armrests with charcoal walnut with matte finish.,1,1.0,1,0,5.2
+Change: replace armrests with,0.5,2,"Change: replace armrests with charcoal walnut with oak in gold, matte finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.5,3,"Change: replace armrests with charcoal walnut, brushed brass, brushed brass, polished finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.5,4,"Change: replace armrests with charcoal walnut, polished finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.5,5,"Change: replace armrests with charcoal leather with oak in gold, oiled finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.5,6,Change: replace armrests with emerald walnut.,1,1.0,1,0,5.2
+Change: replace armrests with,0.5,7,"Change: replace armrests with charcoal cherry wood, golld brushed brass, glossy finish.",1,0.9167,1,0,5.075
+Change: replace armrests with,0.5,8,"Change: replace armrests with sand dark wood, glossy finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.5,9,"Change: replace armrests with charcoal dark wood, matte finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.5,10,"Change: replace armrests with sand black walnut, brushed finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.5,1,"Spec update: cabinet handles to emerald oak, glossy finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.5,2,"Spec update: cabinet handles to emerald cherry wood, satin finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.5,3,"Spec update: cabinet handles to emerald black leather, glossy finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.5,4,"Spec update: cabinet handles to charcoal linen gold, matte finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.5,5,Spec update: cabinet handles to gold leather.,1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.5,6,"Spec update: cabinet handles to charcoal linen, glossy finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.5,7,"Spec update: cabinet handles to emerald walnut with gold linen, glossy finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.5,8,"Spec update: cabinet handles to emerald boucle, oiled finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.5,9,"Spec update: cabinet handles to charcoal walnut with brushed brass, oiled finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.5,10,"Spec update: cabinet handles to charcoal linen, glossy finish.",1,1.0,1,0,5.2
+Update: chair legs changed to,0.8,1,"Update: chair legs changed to satin charcoal boucle walnut, oiled finish.",1,1.0,1,0,5.2
+Update: chair legs changed to,0.8,2,Update: chair legs changed to matte finish.,1,1.0,0,0,3.2
+Update: chair legs changed to,0.8,3,"Update: chair legs changed to warm brown dark wood, brushed finish.",1,1.0,1,0,5.2
+Update: chair legs changed to,0.8,4,"Update: chair legs changed to charcoal dark wood, textured finish.",1,1.0,1,0,5.2
+Update: chair legs changed to,0.8,5,Update: chair legs changed to matte finish.,1,1.0,0,0,3.2
+Update: chair legs changed to,0.8,6,"Update: chair legs changed to charcoal dark wood, glodsy marble, textured finish.",1,0.9167,1,0,5.075
+Update: chair legs changed to,0.8,7,"Update: chair legs changed to boucle, brushed finish.",1,1.0,1,0,5.2
+Update: chair legs changed to,0.8,8,"Update: chair legs changed to charcoal brushed brass, charcoal marble.",1,1.0,1,0,5.2
+Update: chair legs changed to,0.8,9,"Update: chair legs changed to sain walnut, polished finish.",1,0.8889,1,0,5.033
+Update: chair legs changed to,0.8,10,"Update: chair legs changed to white vexvek, glossy finish.",1,0.8889,1,0,5.033
+Update: sofa cushions updated to,0.8,1,"Update: sofa cushions updated to charcoal wood, polished finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.8,2,"Update: sofa cushions updated to emerald brushed brass, textured finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.8,3,"Update: sofa cushions updated to boucle, oiled finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.8,4,"Update: sofa cushions updated to white cherry wood, glossy finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.8,5,"Update: sofa cushions updated to emerald black leather, oiled finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.8,6,"Update: sofa cushions updated to sand dark wood,, glossy finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.8,7,"Update: sofa cushions updated to charcoal cherry wood, satin finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,0.8,8,"Update: sofa cushions updated to ood with brushed brass, glossy finish.",1,0.9091,1,0,5.064
+Update: sofa cushions updated to,0.8,9,"Update: sofa cushions updated to emerald leavy wulnd marble, oiled finish.",1,0.8182,1,0,4.927
+Update: sofa cushions updated to,0.8,10,Update: sofa cushions updated to matte finish.,1,1.0,0,0,3.2
+Update: table top modified to,0.8,1,"Update: table top modified to oak, goldle,,et black, oiled finish.",1,0.8182,1,0,4.927
+Update: table top modified to,0.8,2,"Update: table top modified to charcoal walnut, polished finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.8,3,"Update: table top modified to marble, brushed brass, glossy finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.8,4,"Update: table top modified to emrerald dark wood, polished finish.",1,0.9,1,0,5.05
+Update: table top modified to,0.8,5,"Update: table top modified to black leather, satin finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.8,6,"Update: table top modified to warm brown walnut, glossy finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.8,7,"Update: table top modified to brushed brass, polished finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.8,8,"Update: table top modified to charcnal cherry wood, tegtued finish.",1,0.8,1,0,4.9
+Update: table top modified to,0.8,9,"Update: table top modified to boucle, glossy finish.",1,1.0,1,0,5.2
+Update: table top modified to,0.8,10,"Update: table top modified to charcoal cherry wood, glossy finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.8,1,"Change: replace armrests with charcoal velvet brushed brass, satin finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.8,2,Change: replace armrests with oak walnut with matte finish.,1,1.0,1,0,5.2
+Change: replace armrests with,0.8,3,"Change: replace armrests with charcoal cherry wood, brushed brass in gold, matte finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.8,4,"Change: replace armrests with oak walnut, oiled finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.8,5,"Change: replace armrests with navy blue rattan, glossy finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.8,6,"Change: replace armrests with beige marble, textured finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.8,7,"Change: replace armrests with sand dark wood, brushed brass, goldel safinet matte finish.",1,0.8462,1,0,4.969
+Change: replace armrests with,0.8,8,"Change: replace armrests with white boucle, glossy finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.8,9,"Change: replace armrests with navy blue marble, glossy finish.",1,1.0,1,0,5.2
+Change: replace armrests with,0.8,10,"Change: replace armrests with black leather, glossy finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.8,1,Spec update: cabinet handles to emerald walnutt oiled finish.,1,0.8889,1,0,5.033
+Spec update: cabinet handles to,0.8,2,Spec update: cabinet handles to white walnut with satin finish.,1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.8,3,"Spec update: cabinet handles to satin chair seat modified to charcoal linen in beige modified to black gols, with brushed",1,0.95,1,0,5.125
+Spec update: cabinet handles to,0.8,4,"Spec update: cabinet handles to charcoal walnut rhandle, oiled finish.",1,0.9,1,0,5.05
+Spec update: cabinet handles to,0.8,5,"Spec update: cabinet handles to gold velek, oiled finish.",1,0.8889,1,0,5.033
+Spec update: cabinet handles to,0.8,6,"Spec update: cabinet handles to sand boucle, matte finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.8,7,"Spec update: cabinet handles to oak linen, oiled finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.8,8,"Spec update: cabinet handles to gold dark wood, chair legs polished finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.8,9,Spec update: cabinet handles to charcoal leather.,1,1.0,1,0,5.2
+Spec update: cabinet handles to,0.8,10,"Spec update: cabinet handles to white cherry wood, brushed brass, satin finish.",1,1.0,1,0,5.2
+Update: chair legs changed to,1.1,1,Update: chair legs changed to mattenffish.,1,0.8333,0,0,2.95
+Update: chair legs changed to,1.1,2,"Update: chair legs changed to matte steel, catn brushed finigsh.",1,0.8,1,0,4.9
+Update: chair legs changed to,1.1,3,"Update: chair legs changed to navy blue erarmles with white, black rattan, charcoal golvc roal cherry wood, matte finis",1,0.8421,1,0,4.963
+Update: chair legs changed to,1.1,4,"Update: chair legs changed to white velvet, rattat, emerald dark wood, matte finish.",1,0.9231,1,0,5.085
+Update: chair legs changed to,1.1,5,"Update: chair legs changed to changed to oa.k charcooal dark wood, chargled vo dark henlel rattan, oile, polished brass",1,0.7,1,0,4.75
+Update: chair legs changed to,1.1,6,"Update: chair legs changed tol charcoal linen with goldle, matte finish.",1,0.8182,1,0,4.927
+Update: chair legs changed to,1.1,7,Update: chair legs changed to emrelac cherry ood with dark modiified to walnut.,1,0.7692,1,0,4.854
+Update: chair legs changed to,1.1,8,"Update: chair legs changed to sand blue matel oive, oiled finish.",1,0.8182,1,0,4.927
+Update: chair legs changed to,1.1,9,"Update: chair legs changed to brushed barme wile, matte finish.",1,0.8,0,0,2.9
+Update: chair legs changed to,1.1,10,Update: chair legs changed to emerald linen with polished finish.,1,1.0,1,0,5.2
+Update: sofa cushions updated to,1.1,1,"Update: sofa cushions updated to sand marble, brushed finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,1.1,2,"Update: sofa cushions updated to emerald walnet, walnut.",1,0.875,1,0,5.013
+Update: sofa cushions updated to,1.1,3,"Update: sofa cushions updated to charcoal soxd ralin boucle, glossy finish.",1,0.8182,1,0,4.927
+Update: sofa cushions updated to,1.1,4,"Update: sofa cushions updated to white charel dark wood, glossy finish.",1,0.9091,1,0,5.064
+Update: sofa cushions updated to,1.1,5,Update: sofa cushions updated to bouge cherry wiond chraler polished finish.,1,0.7273,0,0,2.791
+Update: sofa cushions updated to,1.1,6,"Update: sofa cushions updated to marble, glossy finish.",1,1.0,1,0,5.2
+Update: sofa cushions updated to,1.1,7,"Update: sofa cushions updated to dark woolgd t boucle, dark wood.",1,0.8182,1,0,4.927
+Update: sofa cushions updated to,1.1,8,"Update: sofa cushions updated to emeralgd brushed brass, brushed brassy in sand, brushe, boucle walnut, polished finish.",1,0.8235,1,0,4.935
+Update: sofa cushions updated to,1.1,9,"Update: sofa cushions updated to beige brushed black kalnut cherry, wood.",1,0.9091,1,0,5.064
+Update: sofa cushions updated to,1.1,10,"Update: sofa cushions updated to gold line, matte finish.",1,0.8889,1,0,5.033
+Update: table top modified to,1.1,1,Update: table top modified to matte steel.,1,1.0,1,0,5.2
+Update: table top modified to,1.1,2,Update: table top modified to matbe cherry wood brushed finish.,1,0.9,1,0,5.05
+Update: table top modified to,1.1,3,"Update: table top modified to marble, matte finish.",1,1.0,1,0,5.2
+Update: table top modified to,1.1,4,"Update: table top modified to matte steel,, brushed brass, glossy finish.",1,1.0,1,0,5.2
+Update: table top modified to,1.1,5,"Update: table top modified to boucle cherry wood, satin finish.",1,1.0,1,0,5.2
+Update: table top modified to,1.1,6,"Update: table top modified to rattan, satin finish.",1,1.0,1,0,5.2
+Update: table top modified to,1.1,7,"Update: table top modified to charcoal wood, glossy finish.",1,1.0,1,0,5.2
+Update: table top modified to,1.1,8,"Update: table top modified to charcoal darkpstexth backrest modiffeet texlute charcoal linen, satin finish.",1,0.7857,1,0,4.879
+Update: table top modified to,1.1,9,"Update: table top modified to to warm brown marbles, textured finish.",1,0.9091,1,0,5.064
+Update: table top modified to,1.1,10,"Update: table top modified to, chailee to white marble, textured finish.",1,0.9091,1,0,5.064
+Change: replace armrests with,1.1,1,Change: replace armrests with charrr soat modified to boucle with walnut with glossy finish.,1,0.8571,1,0,4.986
+Change: replace armrests with,1.1,2,"Change: replace armrests with emerald linen, glossy finish.",1,1.0,1,0,5.2
+Change: replace armrests with,1.1,3,Change: replace armrests with dark wood.,1,1.0,1,0,5.2
+Change: replace armrests with,1.1,4,"Change: replace armrests with sandd drawele, emerald brown sand sped in chinet harcle with satin finish.",1,0.6875,1,0,4.731
+Change: replace armrests with,1.1,5,"Change: replace armrests with gold black walnut, cherry wood, glossy finish.",1,1.0,1,0,5.2
+Change: replace armrests with,1.1,6,Change: replace armrests with charble top to sand arm ter matte finish.,1,0.75,1,0,4.825
+Change: replace armrests with,1.1,7,Change: replace armrests with shacr oaly darko walnut.,1,0.625,1,0,4.638
+Change: replace armrests with,1.1,8,Change: replace armrests with sand velvetu- brushed finish.,1,0.875,1,0,5.013
+Change: replace armrests with,1.1,9,"Change: replace armrests with charcoal leather, satin finish.",1,1.0,1,0,5.2
+Change: replace armrests with,1.1,10,"Change: replace armrests with white boucles, modified t table wold, oiled finish.",1,0.75,1,0,4.825
+Spec update: cabinet handles to,1.1,1,"Spec update: cabinet handles to charc arato whod cherry wood, blue harblen, polished finish.",1,0.7143,1,0,4.771
+Spec update: cabinet handles to,1.1,2,Spec update: cabinet handles to emerald linen.,1,1.0,1,0,5.2
+Spec update: cabinet handles to,1.1,3,"Spec update: cabinet handles to dark wood, glossy finish.",1,1.0,1,0,5.2
+Spec update: cabinet handles to,1.1,4,Spec update: cabinet handles to emerald c rattan with lineth finish.,1,0.9091,1,0,5.064
+Spec update: cabinet handles to,1.1,5,Spec update: cabinet handles to white cherry wooy.,1,0.875,1,0,5.013
+Spec update: cabinet handles to,1.1,6,Spec update: cabinet handles to gold boucle with dark wood.,1,1.0,1,0,5.2
+Spec update: cabinet handles to,1.1,7,Spec update: cabinet handles to matte finish.,1,1.0,0,0,3.2
+Spec update: cabinet handles to,1.1,8,"Spec update: cabinet handles to black lear #rest, finish.",1,0.7778,0,0,2.867
+Spec update: cabinet handles to,1.1,9,Spec update: cabinet handles to matte finish.,1,1.0,0,0,3.2
+Spec update: cabinet handles to,1.1,10,"Spec update: cabinet handles toxcharcoal matte wto white cherry, wood with oiled finish.",1,0.8462,1,0,4.969

@@ -37,6 +37,7 @@ CatalogUpdate AI is a batch product-image editor designed specifically for furni
 - **Inpainting Model**: `stable-diffusion-v1-5/stable-diffusion-inpainting` (FP16 on CUDA, CPU fallback for import verification)
 - **Auto-Masking Model**: `CIDAS/clipseg-rd64-refined`
 - **ControlNet Model**: `lllyasviel/control_v11p_sd15_canny` (FP16 on CUDA, optional structure preservation)
+- **Text Generation Model**: Custom 2-layer Character-Level LSTM (`CharLSTM`, hidden 256, embedding 64) for autoregressive furniture specification generation
 
 ---
 
@@ -70,6 +71,15 @@ Gen-AI_Final/
     prompts.py
     evaluate.py
     config.py
+    text/
+      __init__.py
+      make_corpus.py
+      preprocess_text.py
+      model.py
+      train.py
+      generate.py
+      evaluate_text.py
+      spec_parser.py
   tests/
     conftest.py
     test_batch.py
@@ -78,6 +88,7 @@ Gen-AI_Final/
     test_evaluate.py
     test_preprocess.py
     test_prompts.py
+    test_text.py
   notebooks/
     colab_run.ipynb
   data/

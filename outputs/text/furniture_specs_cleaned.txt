@@ -1,0 +1,459 @@
+update: armrests modified to brushed brass in emerald, matte finish.
+update: dining chair seat modified to dark wood in matte black, brushed finish.
+update: drawer pulls modified to linen in sand, textured finish.
+update: coffee table surface changed to navy blue black leather.
+spec update: sofa cushions updated to white walnut, polished finish.
+update: change sofa cushions to navy blue dark wood with textured fini,sh.
+update: couch fabric changed to charcoal matte steel.
+spec update: chair legs updated to charcoal dark wood, matte finish.
+update: armrests changed to matte black rattan, glossy finish.
+spec update: couch fabric updated to sand velvet, matte finish.
+update: drawer pulls changed to gold velvet.
+change: replace dining chair seat with sand velvet, brushed finish.
+update: change couch fabric to dark oak with glossy finish.
+update: dining chair seat changed to navy blue linen.
+spec update: chair legs updated to navy blue linen, matte finish.
+update: change coffee table surface to navy blue oak with oiled finish.
+change: replace dining chair seat with charcoal brushed brass, textured finish.
+update: dining chair seat changed to emerald marble, oiled finish.
+change: replace sofa cushions with beige rattan, polished finish.
+update: sofa cushions modified to velvet in matte black, oiled finish.
+update: change backrest to warm brown dark wood with polished finish.
+change: replace couch fabric with sand brushed brass, satin finish.
+update: armrests changed to sand linen, brushed finish.
+spec update: couch fabric updated to matte black marble, glossy finish.
+update: drawer pulls changed to gold walnut.
+update: coffee table surface changed to gold boucle, matte finish.
+update,: drawer pulls modified to velvet in beige, brushed finish.
+update: coffee table surface changed to emerald cherry wood.
+change: replace sofa cushions with navy blue black leather, matte finish.
+update: sofa cushions modified to rattan in warm brown, satin finish.
+change: replace coffee table surface with sand brushed brass, brushed finish.
+update: dining chair seat changed to charcoal black leather.
+update: table top changed to warm brown brushed brass, textured finish.
+update: couch fabric modified to matte steel in dark, polished finish.
+change: replace dining chair seat with gold rattan, polished finish.
+update: change armrests to charcoal boucle with polished finish.
+change: replace cabinet handles with sand black leather, satin finish.
+update: couch fabric changed to beige dark wood, brushed finish.
+update: change chair legs to beige linen with oiled finish.
+update:.change backrest to emerald velvet with textured finish.
+update: change chair legs to.warm brown matte steel with matte finish.
+update: change armrests to emerald walnut with glossy finish.
+update: change cabinet handles to charcoal velvet with satin finish.
+change: replace chair legs with warm brown dark wood, satin finish.
+update: table top modified to boucle in sand, satin finish.
+update: cabinet handles changed to warm brown velvet.
+spec update: coffee table surface updated to charcoal oak, oiled finish.
+update: coffee table surface changed to beige oak, glossy finish.
+update: change coffee table surface to sand boucle with polished finish.
+spec update: armrests updated to warm brown dark wood, glossy finish.
+update: coffee table surface modified to black leather in matte black, polished finish.
+update: armrests changed to emerald marble, glossy finish.
+update: dining chair seat changed to emerald oak.
+spec update: table top updated to charcoal brushed brass, polished finish.
+update: coffee table surface changed to sand dark wood, oiled finish.
+spec update: dining chair seat updated to gold boucle, brushed finish.
+update: chair legs modified to dark wood in charcoal, polished finish.
+update: couch fabric changed to gold oak, oiled finish.
+spec update: couch fabric updated to warm brown black leather, brushed finish.
+update: armrests changed to beige rattan.
+update: sofa cushions changed #to white matte steel, textured finish.
+update: drawer pulls modified to walnut in matte black, oiled finish.
+update: drawer pulls changed to emerald boucle.
+change: replace sofa cushions with emerald walnut, polished finish.
+update: cabinet handles modified to velvet in gold, brushed finish.
+update: coffee table surface changed to sand cherry wood, matte finish.
+update: backrest changed to warm brown oak.
+change: replace armrests with emerald cherry wood, glossy finish.
+update: change coffee table surface to white cherry wood with brushed finish.
+update: couch fabric changed to matte b #lack cherry wood.
+change: replace couch fabric with matte black velvet, polished finish.
+change: replace dining chair seat with white walnut, polished finish.
+update: change drawer pulls to white black leather with satin finish.
+spec update: chair legs updated to navy blue dark wood, brushed finish.
+update: couch fabric changed to white matte steel, oiled finish.
+spec update: armrests updated to dark velvet, oiled finish.
+spec update: dining chair seat updated to charcoal velvet, satin finish.
+update: armrests changed to emerald velvet.
+update: dining chair seat modified to matte steel in beige, textured finish.
+change: replace sofa cushions with matte black blac.k leather, glossy finish.
+spec update: chair legs updated to emerald marble, textured finish.
+update: table top changed to charcoal dark wood.
+update: change sofa cushions to sand velvet with brushed finish.
+update: dining chair seat modified to oak in gold, glossy finish.
+update: change coffee table surface to white walnut with matte finish.
+update: coffee table surface modified to linen in gold, oiled finish.
+update: coffee table surface changed to warm brown oak.
+update: change drawer pulls to warm brown matte steel with glossy finish.
+change: replace sofa cushions with warm brown matte steel, polished finish.
+update: backrest changed to matte black matte steel.
+update: change drawer pulls to warm brown boucle with matte finish.
+update: armrests modified to black leather in warm brown, brushed finish.
+update: armrests changed to dark dark wood, glossy finish.
+update: backrest changed to warm brown matte steel.
+update: change backrest to beige oak with glossy finish.
+update: change couch fabric to dark dark wood with glossy finish.
+update: change table top to warm brown black leather with polished finish.
+update: change cabinet handles to dark black leather with polished finish.
+update: change table top to sand velvet with brushed finish.
+update: sofa cush.ions modified to rattan in dark, satin finish.
+update: change couch fabric to sand rattan with oiled finish.
+spec update: table top updated to beige matte steel, glossy finish.
+update: change coffee table surface to sand matte steel with satin finish.
+update: coffee table surface changed to warm brown boucle.
+change: replace armrests with navy blue oak, glossy finish.
+spec update: table top updated to charcoal velvet, oiled finish.
+update: change table top to gold cherry wood with oiled finish.
+change: replace armrests with matte black oak, polished finish.
+update: coffee table surface modified to boucle in matte black, textured finish.
+update: coffee table surface changed to gold dark wood.
+update: chair legs modified to black leather in navy blue, satin finish.
+update: table top modified to oak in white, satin finish.
+update: change table top to white black leather with oiled finish.
+update: dining chair seat changed to white oak, matte finish.
+update: dining chair seat changed to gold velvet, polished finish.
+update: couch fabric modified to boucle in navy blue, oiled finish.
+update: backrest changed to white cherry wood, glossy finish.
+spec update: sofa cushions updated to navy blue: matte steel, brushed finish.
+spec update: sofa cushions updated to emerald brushed brass, oiled finish.
+update: change table top to sand dark wood with textured finish.
+update: cabinet han.dles changed to gold boucle.
+change: replace dining chair seat with matte black boucle, glossy finish.
+update: dining chair seat changed to gold marble.
+change: replace backrest with white linen, glossy finish.
+update: cabinet handles changed to emerald oak.
+update: dining chair seat modified to rattan in beige, brushed finish.
+update: change dining chair seat to beige dark wood with satin finish.
+update: sofa cushions changed to navy blue dark wood, glossy finish.
+update: table top modified to brushed brass in white, matte finish.
+spec update: chair legs updated to sand walnut, oiled finish.
+update: backrest changed to matte black oak.
+change: replace backrest with white brushed brass, matte finish.
+update: sofa cushions changed to gold matte steel, satin finish.
+update: sofa cushions changed to dark dark wood.
+spec update: drawer pulls updated to gold cher.ry wood, textured finish.
+update: change armrests to white matte steel with satin finish.
+update: chair legs modified to black leather in warm brown, polished finish.
+update: drawer pulls changed to matte black walnut, matte finish.
+change: replace armrests with white walnut, oiled finish.
+update: coffee ta.ble surface changed to navy blue rattan.
+change: replace backrest with warm brown matte steel, polished finish.
+spec update: drawer pulls updated to warm brown walnut, oiled finish.
+update: couch fabric changed to emerald black leather.
+update: change couch fabric to em #erald boucle with matte finish.
+update: backrest changed to gold brushed brass.
+change: replace cabinet handles with warm brown oak, brushed finish.
+spec update: table top updated to gold rattan, satin finis #h.
+update: dining;chair seat modified to walnut in navy blue, oiled finish.
+update: coffee table surface modified to boucle in navy blue, textured finish.
+update: change table top to navy blue brushed brass with satin finish.
+update: sofa cushions changed to warm brown walnut, satin finish.
+update: change backrest to emerald dark wood with satin finish.
+update: change couch fabric to white matte steel with brushed finish.
+update: chair legs modified to oak in beige, glossy finish.
+change: replace drawer pulls with warm brown brushed brass, brushed finish.
+update: change backrest to warm brown cherry wood with glossy finish.
+update: couch fabric changed to sand oak.
+change: replace drawer pulls with beige cherry wood, polished finish.
+change: replace cabinet handles with navy blue linen, glossy finish.
+update: couch fabric modified to boucle in navy blue, satin finish.
+update: couch fabric modified to cherry wood in gold, satin finish.
+update: couch fabric changed to emerald velvet.
+update:; cabinet handles changed to dark brushed brass, oiled finish.
+update: change backrest to navy blue marble with matte finish.
+update: table top modified to marble in white, textured fini:sh.
+spec update: coffee table surface updated to dark linen, oiled finish.
+change: replace couch fabric with sand velvet, matte finish.
+update: coffee table surface changed to gold brushed brass, textured finish.
+update: couch fabric changed to warm brown rattan, satin finish.
+update: change armrests to navy blue rattan with glossy finish.
+update: table top changed to sand oak.
+change: replace table top with dark matte steel, oiled finish.
+update: table top changed to navy blue dark wood.
+change: replace coffee table surface with navy blue walnut, matte finish.
+update: table top modified to linen in beige, glossy finish.
+update: drawer pulls changed to gold oak, brushed finish.
+spec update: backrest updated to dark brushed brass, satin finish.
+spec update: drawer pulls updated to beige cherry wood, brushed finish.
+update: armrests changed to beige matte steel.
+update: change couch fabric to matte black matte steel with textured finish.
+change: replace chair legs with charcoal boucle, oiled finish.
+spec update: couch fabric updated to charcoal walnut, satin finish.
+update: couch fabric changed to dark black leather.
+update: sofa cushions changed to matte black cherry wood, oiled finish.
+update: change backrest to gold walnut with textured finish.
+update: couch fabric modified to matte steel in matte black, brushed finish -.
+change: replace coffee table surface wi.th navy blue black leather, glossy finish.
+change: replace drawer pulls with warm brown matte steel, brushed finish.
+update: chair legs changed to charcoal walnut.
+update: armrests changed to beige linen, satin finish.
+update: table top modified to marble in beige, satin finish.
+change: replace coffee table surface with sand velvet, glossy finish.
+update: change cabinet handles to dark oak with polished finish.
+update: change backrest to matte black brushed brass with satin finish.
+update: change coffee table surface to white marble with brushed finish.
+update: dining chair seat changed to charcoal linen, brushed finish.
+update: change sofa cushions to dark walnut with satin finish.
+update: chair legs modified to rattan in matte black, glossy finish.
+update: armrests modified to brushed brass in beige, glossy finish.
+update: table top changed to dark linen.
+update: cabinet handles changed to gold brushed brass, glossy finish.
+update: change drawer pulls to dark boucle with textured finish.
+up:date: change sofa cushions to matte black marble with brushed finish.
+spec update: backrest updated to warm brown rattan, textured finish.
+update: change sofa cushions to gold matte steel with brushed finish.
+update: cha.ir legs modified to linen in sand, matte finish.
+update: table top changed to charcoal cherry wood.
+spec update: table top updated to sand dark wood, polished finish.
+update: change table top to. warm brown rattan with glossy finish.
+update: coffee table surface changed to white cherry wood.
+update: dining chair seat changed to white black leather.
+spec update: couch fabric updated to sand linen, brushed finish.
+update: dining chair seat changed to dark matte steel, matte finish.
+update: backrest changed to matte black rattan, polished finish.
+update: armrests modified to matte steel in navy blue, textured finish.
+update: change sofa cushions to matte black marble with matte finish.
+update: dining chair seat changed to white walnut, brushed finish.
+update: backrest changed to warm brown oak, oiled finish.
+update: change drawer pulls to charcoal walnut with oiled finish.
+update: change sofa cushions to charcoal boucle with matte finish.
+update: cabinet handles changed to beige velvet.
+update: couch fabric changed to charcoal black leather.
+update: sofa cushions changed to matte black linen, matte finish.
+update: change drawer pulls to sand dark wood with glossy finish.
+update: sofa cushions modified to marble in white, textured finish.
+update: backrest modified to brushed brass in navy blue, polished finish.
+update: change table top to warm brown rattan with matte finish.
+spec update: dining chair seat updated to charcoal rattan, brushed finish.
+update: chair legs changed to matte black rattan, brushed finish.
+update: cabinet handles modified to boucle in dark, satin finish.
+change: replace armrests with navy blue matte steel, glossy finish.
+spec update: sofa cushions updated to beige brushed brass, satin finish.
+change: replace couch fabric with navy blue rattan, satin finish.
+spec update: sofa cushions updated to sand velvet, matte finish.
+update: change backrest to emerald oak with textured finish.
+spec update: dining chair seat updated to warm brown marble, brushed finish.
+spec update: dining chair seat updated to sand cherry wood, textured finish.
+spec update: armrests updated; to white boucle, oiled finish.
+update: backrest modified to oak in matte black, matte finish.
+update: table top changed to emerald marble.
+change: replace armrests with emerald velvet, polished finish.
+update: drawer pulls changed to white boucle, polished finish.
+spec update: couch fabric updated to charcoal marble, oiled finis.h.
+update: cabinet handles changed to white black leather, glossy finish.
+upd.ate: chair legs changed to emerald marble.
+update: table top changed to sand dark wood, matte finish.
+spe.c update: table top updated to matte black marble, satin finish.
+update: change armrests to white matte steel with matte finish.
+update: coffee table surface changed to charcoal matte steel, brushed finish.
+update: coffee table surface changed to warm brown matte steel, textured finish.
+u;pdate: change sofa cushions to matte black brushed brass with matte finish.
+update: sofa cushions changed to emerald oak.
+spec update: armrests updated to emerald boucle, polished finish.
+update: change backrest to sand rattan with textured finish.
+update: change drawer pulls to charcoal black leather with glossy finish.
+update: armrests changed to charcoal ve,lvet.
+update: dining chair seat changed to gold rattan, polished finish.
+update: change couch fabric to charcoal linen with oiled finish.
+update: drawer pulls changed to matte black matte steel, polished finish.
+update: change couch fabric to matte black linen with oiled finish.
+update: chair legs changed to warm brown black leather, textured finish.
+change: replace couch fabric with navy blue boucle, polished finish.
+update: coffee table surface changed to warm brown walnut.
+spec update: backrest updated to emerald dark wood, textured finish.
+update: change cabinet handles to emerald dark wood with glossy finish.
+update: change chair legs to beige linen with matte finish.
+change: replace table top with emerald walnut, brushed finish.
+change: replace coffee table surface with matte black oak, polished finish.
+change: replace drawer pulls with dark marble, matte finish.
+update: dining chair seat changed to gold matte steel.
+update: chair legs changed to navy blue walnut.
+update: armrests changed to beige cherry wood, satin finish.
+update: change chair legs to emerald black leather with glossy finish.
+update: table top modified to boucle in dark, glossy finish.
+update: backrest changed to beige black leather, polished finish.
+update: coffee table surface modified to oak in charcoal, satin finish.
+update: cabinet handles changed to beige dark wood.
+spec update: dining chair seat updated to matte black matte steel, matte finish.
+change: replace armrests with white boucle, polished finish.
+update: backrest modified to linen in matte black, satin finish.
+spec update: coffee table surface updated to emerald boucle, oiled finish.
+spec update: sofa cushions updated to emerald matte steel, polished finish.
+update: coffee table surface modified to boucle in gold, oiled finish.
+update: cabinet handles changed to warm brown matte steel.
+update: dining chair seat changed to sand brushed brass.
+update: coffee table surface changed to dark matte steel, textured finish.
+spec update: armrests updated to gold rattan, textured finish.
+update: backrest changed to matte black velvet.
+change: replace dining chair seat with emerald cherry wood, brushed finish.
+update: armrests changed to matte black brushed brass.
+change: replace drawer pulls with charcoal linen, glossy finish.
+update: coffee table surface modified to oak in gold, glossy finish.
+spec update: chair legs updated to matte black cherry wood, textured finish.
+spec update: couch fabric updated to beige brushed brass, glossy finish.
+update: backrest changed to emerald rattan, oiled finish.
+spec update: table top updated to sand cherry wood, satin finish.
+update: sofa cushions modified to cherry wood in matte black, oiled finish.
+update: dining chair seat changed to charcoal matte steel, polished finish.
+update: sofa cushions changed to charcoal cherry wood.
+update: couch fabric modified to cherry wood in navy blue, brushed finish.
+update: backrest modified to linen in white, brushed finish.
+spec update: armrests updated to dark brushed brass, brushed finish.
+update: change coffee table surface to white oak with oiled finish.
+update: chair legs changed to matte black linen, oiled finish.
+update: chair legs changed to matte black wa.lnut, oiled finish.
+spec update: chair legs updated to navy blue oak, glossy finish.
+update: couch fabric changed to emerald brushed brass.
+spec update: table top updated to dark walnut, glossy finish.
+update: dining chair seat changed to navy blue marble.
+spec update: chair legs updated to navy blue cherry wood, satin finish.
+update: chair legs changed to charcoal marble.
+update: coffee table sur;face changed to gold dark wood.
+spec update: couch fabric updated to white black leather, satin finish.
+update: change cabinet handles to charcoal linen with oiled finish.
+change: replace backrest with charcoal linen, oiled finish.
+update: change chair legs to charcoal marble with satin finish.
+change: replace chair legs with charcoal boucle, sa:tin finish.
+update: coffee table surface changed to charcoal matte steel.
+update: cabinet handles changed to sand cherry wood.
+update: drawer pulls modified to velvet in gold, textured finish.
+change: replace armrests with warm brown oak, matte finish.
+update: armrests changed to charcoal velvet.
+update: chair legs changed to dark velvet, brushed finish.
+change: replace b.ackrest with gold brushed brass, matte finish.
+change: replace table top with sand black leather, polished f.inish.
+update: backrest changed to beige oak, brushed finish.
+update: change chair legs to gold boucle with polished finish.
+change: replace coffee table surface with beige linen, textured finish.
+update: couch fabric modified to marbl #e in sand, textured finish.
+update: dining chair seat changed to charcoal oak.
+update: dining chair seat modified to cherry wood in beige, matte finish.
+change: replace backrest with matte black velvet, polished finish.
+update: dining chair seat changed to emerald linen.
+update: sofa cushions changed to sand brushed brass.
+change: replace table top with charcoal rattan, matte finish.
+change: replace chair legs with gold linen, satin finish.
+update: table top modified to walnut in white, oiled finish.
+change: replace dining chair seat with emerald brushed brass, brushed finish.
+spec update: sofa cushions updated to warm brown oak, matte finish.
+update: sofa cushions changed to navy blue rattan.
+update: cabinet handles changed to dark velvet.
+update: table top modified to matte steel in matte black, textured finish.
+update: cabinet handles changed to emerald dark wood.
+change: replace coffee table surface with dark boucle, matte finish.
+change: replace cabinet handles with matte black dark wood, glossy finish.
+update: backrest changed to beige walnut, oiled finish.
+update: change drawer pulls to emerald oak with matte finish.
+update: change backrest to emerald velvet with matte finish.
+change: replace dining chair seat with matte black rattan, textured finish.
+update: coffee table surface changed to navy blue marble.
+change: replace cabinet handles with beige dark wood, textured finish.
+update: coffee table surface changed to charcoal oak, oiled finish.
+spec update: dining chair seat updated to navy blue rattan, matte finish.
+spec update: sofa cushions updated to navy blue boucle, glossy finish.
+change: replace couch fabric with dark walnut, oiled finish.
+change: replace backrest with navy blue velvet, s.atin finish.
+update: couch fabric changed to gold walnut, polished finish.
+update: sofa cushions changed to sand cherry wood, glo:ssy finish.
+update: change table top to navy blue walnut with matte;finish.
+spec update:. dining chair seat updated to sand linen, satin finish.
+update: dining chair seat changed to warm brown marble.
+update: sofa cushions changed to white walnut.
+spec update: cabinet handles updated to matte black boucle, satin finish.
+update: change backrest to sand black leather with brushed finish.
+change: replace drawer pulls with white linen, polished finish.
+update: armrests changed to beige dark wood.
+update: chair legs changed to beige walnut, glossy, finish.
+update: change backrest to warm brown walnut with satin finish.
+update: armrests changed to warm brown oak, brushed finish.
+update: table top changed to emerald rattan, matte finish.
+change: replace dining chair seat with charcoal rattan, glossy finish.
+update: backrest changed to gold black leather, satin finish.
+update: change chair legs to white oak with polished finish.
+update: backrest changed to emerald rattan, matte finish.
+change: replace table top with navy blue black leather, textured finish.
+spec update: sofa cushions updated to gold boucle, polished. finish.
+update: cabinet handles changed to gold dark wood, textured finish.
+update: couch fabric changed to charcoal linen, glossy finish.
+change: replace dining chair seat with matte black matte steel, matte finish.
+update: sofa cushions changed to warm - brown velvet.
+spec update: couch fabric updated to gold walnut, matte finish.
+update: couch fabric modified to black leather in white, satin finish.
+update: sofa cushions changed to beige boucle, oiled finish.
+update: couch fabric changed to navy blue waln - ut.
+change: replace armrests with sand dark wood, polished finish.
+update: cabinet handles changed to charcoal dark wood.
+change: replace armrests with navy blue marble, brushed finish.
+update: cabinet handles modified to marble in white, matte finish.
+update: change coffee table surface to warm brown cherry wood with glossy finish.
+spec update: cabinet handles updated to matte black velvet, oiled finish.
+update: coffee table surface changed to gold marble.
+update: sofa cushions changed to emerald velvet, oiled finish.
+update: sofa cushions modified to linen in sand, glossy finish.
+change: replace couch fabric with gold velvet, brushed finish.
+change: replace chair legs with navy blue cherry wood, glossy finish.
+update: dining chair seat - changed to charcoal dark wood.
+update: change drawer pulls to emerald walnut with satin finish.
+update: couch fabric modified to marble # in sand, oiled finish.
+update: coffee table surface changed to warm brown cherry wood.
+update: couch fabric changed to dark dark wood.
+spec update: couch fabric updated to gold cherry wood, satin finish.
+change: replace chair legs with charcoal black leather, matte finish.
+change: replace drawer pulls with gold linen, oiled finish.
+spec update: armrests updated to matte black matte steel, matte finish.
+change: replace couch fabric with navy blue brushed brass, satin finish.
+spec update: sofa cushions updated to gold marble, polished finish.
+update: armrests modified to bou #cle in sand, polished finish.
+update: change cabinet handles to sand velvet with matte finish.
+update: backrest changed to warm brown marble, textured finish.
+change: replace dining chair seat with warm brown walnut, textured finish.
+update: sofa cushions changed to navy blue marble.
+update: couch fabric modified to linen in beige, oiled finish.
+update: dining chair seat changed to gold brushed brass, polished finish.
+update: armrests modified to boucle in navy blue, glossy finish.
+update: change sofa cushions to dark matte steel with textured finish.
+update: cabinet handles changed to matte black linen, oiled finish.
+spec update: sofa cushions updated to charcoal walnut, polished finish.
+spec update: coffee table surface updated to beige dark wood, satin finish.
+update: backrest modified to oak in warm brown, oiled finish.
+update: coffee table surface modified to black leather in charcoal, satin finish.
+spec update: sofa cushions updated to emerald cherry wood, polished finish.
+update: cabinet handles changed to navy blue brushed brass, brushed finish.
+spec update: couch fabric updated to sa - nd rattan, glossy finish.
+update: armrests modified to walnut in sand, textured finish.
+update: cabinet handles modified to dark wood in emerald, oiled finish.
+change: replace coffee table surface with sand matte steel, satin finish.
+update: change drawer pulls to beige rattan with brushed finish.
+update: sofa cushions changed to dark black leather.
+spec update: table top updated to white velvet, matte fi - nish.
+spec update: drawer pulls updated to gold matte steel, satin finish.
+update: change table top to gold rattan with glossy finish.
+update: change drawer pulls to white boucle with brushed finish.
+update: change drawer pulls to gold black leather with glossy finish.
+change: replace backrest with white cherry wood, m.atte finish.
+spec update: cabinet handles updated to warm brown matte steel, brushed finish.
+update: armrests changed to sand black leather, satin finish.
+update: change armrests to charcoal rattan with polished finish.
+update: armrests changed to dark rattan.:
+update: change drawer pulls to white cherry wood with glossy finish.
+change: replace.armrests with navy blue matte steel, satin finish.
+update: sofa cushions modified to oak in navy blue, oiled finish.
+spec update: armrests updated to sand linen, glossy finish.
+update: couch fabric modified to brushed brass in matte black, matte finish.
+change: replace table top with white cherry wood, oiled finish.
+update: drawer pulls modified to dark wood in emerald, textured finish.
+update: armrests modified to oak in navy blue, glossy finish.
+update: backrest modified to brushed brass in navy blue, matte finish.
+update: change coffee table surface to emerald linen with satin finish.
+update: cabinet handles changed to warm - brown marble.
+update: armrests changed to sand matte steel.
+update: coffee table surface modified to linen in warm brown, oiled finish.
+update: change coffee table surface to white matte steel with brushed finish.
+spec update: - cabinet handles updated to emerald dark wood, textured finish.
+change: replace sofa cushions with matte black dark wood, matte finish.
+chan.ge: replace armrests with sand boucle, polished finish.
+update: cabinet handles changed to charcoal rattan.
+spec update: cabinet handles updated to beige cherry wood, textured finish.
+spec update: chair legs updated to gold linen, polished finish.
+update: change sofa cushions to dark rattan with oiled finish.

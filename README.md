@@ -30,8 +30,36 @@ A batch product-image editor designed for furniture catalogs. The tool automatic
    * **Cell 9**: Displays the batch results grid (Before vs. Mask vs. After).
    * **Cell 10**: Runs the structure-preserving batch pipeline with ControlNet Canny.
    * **Cell 11**: Runs `compare_controlnet` and displays the side-by-side 4-column comparison grid and edge-map SSIM metrics.
-   * **Cell 12**: Packages and downloads the output archive.
-   * **Cell 13**: Launches the Gradio web interface with `share=True` for interactive batch editing.
+   * **Cell 12**: Generates raw spec corpus (`make_corpus`) and runs text preprocessing (`preprocess_text`) logging dataset statistics.
+   * **Cell 13**: Trains the `CharLSTM` model across 30 epochs and plots the loss curve.
+   * **Cell 14**: Samples specifications across temperatures and runs comprehensive quantitative text evaluation (`evaluate_text`).
+   * **Cell 15**: Packages and downloads the output archive.
+   * **Cell 16**: Launches the Gradio web interface with `share=True` for interactive batch editing.
+
+---
+
+## Text Module (Character-Level Spec LSTM)
+
+CatalogUpdate AI includes a lightweight, self-contained character-level LSTM language model (`CharLSTM`) that autonomously generates novel furniture specification change sentences (e.g. `"Update: chair legs changed to dark walnut, matte finish."`). Generated text is automatically parsed by `src/text/spec_parser.py` into component attributes (`part`, `color`, `material`, `finish`) and piped into the diffusion prompt engine.
+
+### Workflow & CLI Commands:
+
+```bash
+# 1. Generate raw corpus with intentional realistic mess (400-600 lines)
+python -m src.text.make_corpus --lines 500 --seed 42
+
+# 2. Clean text, drop duplicates, build character vocabulary, and save stats
+python -m src.text.preprocess_text --input data/text/furniture_specs_raw.txt --output outputs/text
+
+# 3. Train CharLSTM (Colab T4 GPU: ~20-40s; CPU supported)
+python -m src.text.train --epochs 30 --batch 128 --lr 2e-3
+
+# 4. Generate specification updates with temperature control
+python -m src.text.generate --seed "Update: chair legs changed to" --temperature 0.8 --one-line
+
+# 5. Evaluate quality metrics across 150 samples (PPL, format validity, relevance, diversity)
+python -m src.text.evaluate_text --checkpoint outputs/text/charlstm.pt --output-dir outputs/text
+```
 
 ---
 
@@ -56,6 +84,15 @@ Gen-AI_Final/
     prompts.py      # Spec-aware prompt templates & 12 furniture presets
     evaluate.py     # Evaluation metrics (SSIM outside mask)
     config.py       # Centralized hyperparameters & tuning configuration
+    text/           # Character-level LSTM text generation module
+      __init__.py
+      make_corpus.py     # Deliberately noisy raw corpus generator
+      preprocess_text.py # Text cleaner, char tokenizer, sequence extractor
+      model.py           # 2-layer CharLSTM architecture
+      train.py           # Training pipeline with loss logging & curve plot
+      generate.py        # Autoregressive generation with temperature
+      evaluate_text.py   # Multi-seed/temp quantitative & qualitative benchmark
+      spec_parser.py     # Regex & fallback parser mapping lines to prompt builder
   tests/            # Pytest test suite with CPU mock engine
     conftest.py     # Shared test fixtures
     test_batch.py   # Batch processing tests
@@ -64,6 +101,7 @@ Gen-AI_Final/
     test_evaluate.py# SSIM evaluation metric tests
     test_preprocess.py # RGBA composite, padding, background normalization & report tests
     test_prompts.py # Prompt builder & preset validation tests
+    test_text.py    # CharLSTM cleaning, vocab, model, training smoke & parsing tests
   notebooks/
     colab_run.ipynb # Google Colab T4 runner & smoke test
   data/

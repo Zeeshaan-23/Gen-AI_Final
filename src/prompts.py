@@ -206,6 +206,27 @@ def build_prompt(part: str, change: Dict[str, Any]) -> Tuple[str, str]:
     return positive_prompt, negative_prompt
 
 
+def build_prompt_from_text(line: str) -> Tuple[str, str]:
+    """
+    Parses a natural language specification line (from CharLSTM or user input)
+    and composes positive and negative studio catalog prompts.
+
+    Args:
+        line: Specification update string (e.g. 'Update: chair legs changed to dark walnut, matte finish.').
+
+    Returns:
+        Tuple of (positive_prompt, negative_prompt).
+    """
+    from src.text.spec_parser import parse_spec_line
+    parsed = parse_spec_line(line)
+    change = {
+        "color": parsed.get("color") or "",
+        "material": parsed.get("material") or "",
+        "finish": parsed.get("finish") or "",
+    }
+    return build_prompt(parsed["part"], change)
+
+
 def main():
     """Demo CLI printing generated prompts for all 12 furniture presets."""
     print("=" * 80)

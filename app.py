@@ -135,6 +135,43 @@ def on_preset_select_single(preset_key: str):
     return part, pos, neg
 
 
+def on_generate_lstm(seed_text: str, temperature: float):
+    """Generates specification line with CharLSTM, parses components, and auto-fills fields."""
+    ckpt_path = Path("outputs/text/charlstm.pt")
+    if not ckpt_path.exists():
+        gr.Warning("No trained LSTM checkpoint found at outputs/text/charlstm.pt. Please train the model first using 'python -m src.text.train' or the Colab notebook.")
+        return "", "chair legs", "", "", "", ""
+
+    try:
+        from src.text.generate import generate_from_checkpoint
+        from src.text.spec_parser import parse_spec_line
+        from src.prompts import build_prompt
+
+        generated = generate_from_checkpoint(
+            checkpoint_path=ckpt_path,
+            seed=seed_text.strip() if seed_text else "Update: ",
+            length=100,
+            temperature=float(temperature),
+            device="cpu",
+            stop_at_newline=True,
+        )
+
+        parsed = parse_spec_line(generated)
+        part = parsed["part"] or "chair legs"
+        color = parsed["color"] or ""
+        material = parsed["material"] or ""
+        finish = parsed["finish"] or ""
+
+        change = {"color": color, "material": material, "finish": finish}
+        pos_prompt, _ = build_prompt(part, change)
+
+        gr.Info(f"Generated spec for '{part}'!")
+        return generated, part, color, material, finish, pos_prompt
+    except Exception as e:
+        gr.Warning(f"Text generation error: {e}")
+        return str(e), "chair legs", "", "", "", ""
+
+
 # --- TAB 1: BATCH PROCESSING HANDLER ---
 def process_batch_ui(
     files,
@@ -364,6 +401,28 @@ with gr.Blocks(title="CatalogUpdate AI - Furniture Catalog Editor") as demo:
                         label="Quick Furniture Preset (Auto-fills spec attributes)",
                     )
 
+                    with gr.Accordion("Generate a spec update (LSTM)", open=False):
+                        with gr.Row():
+                            lstm_seed = gr.Textbox(
+                                label="Seed text prompt",
+                                value="Update: chair legs changed to",
+                                placeholder="e.g. Update: chair legs changed to",
+                                scale=3,
+                            )
+                            lstm_temp = gr.Slider(
+                                0.2, 1.5,
+                                value=0.8,
+                                step=0.05,
+                                label="Temperature",
+                                scale=1,
+                            )
+                        lstm_gen_btn = gr.Button("Generate Spec with LSTM", variant="secondary")
+                        lstm_out = gr.Textbox(
+                            label="Generated Spec String (auto-populates fields below)",
+                            interactive=False,
+                            lines=1,
+                        )
+
                     batch_part = gr.Textbox(
                         label="Part to change",
                         value="chair legs",
@@ -438,6 +497,13 @@ with gr.Blocks(title="CatalogUpdate AI - Furniture Catalog Editor") as demo:
                 fn=on_preset_select_batch,
                 inputs=[batch_preset],
                 outputs=[batch_part, batch_color, batch_material, batch_finish, batch_prompt, batch_neg],
+            )
+
+            # Wiring LSTM Spec Generation
+            lstm_gen_btn.click(
+                fn=on_generate_lstm,
+                inputs=[lstm_seed, lstm_temp],
+                outputs=[lstm_out, batch_part, batch_color, batch_material, batch_finish, batch_prompt],
             )
 
             # Wiring Structured Spec inputs to auto-update prompt

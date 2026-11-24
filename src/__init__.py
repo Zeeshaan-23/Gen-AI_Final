@@ -5,7 +5,7 @@ CatalogUpdate AI - Package Initialization.
 from src.engine import CatalogEditor
 
 def __getattr__(name: str):
-    if name in ("build_prompt", "FURNITURE_PRESETS", "DEFAULT_NEGATIVE_PROMPT"):
+    if name in ("build_prompt", "build_prompt_from_text", "FURNITURE_PRESETS", "DEFAULT_NEGATIVE_PROMPT"):
         import src.prompts as _prompts
         return getattr(_prompts, name)
     if name in ("run_batch", "zip_outputs", "MockCatalogEditor"):
@@ -28,6 +28,7 @@ __all__ = [
     "run_batch",
     "zip_outputs",
     "build_prompt",
+    "build_prompt_from_text",
     "FURNITURE_PRESETS",
     "DEFAULT_NEGATIVE_PROMPT",
     "compare_controlnet",

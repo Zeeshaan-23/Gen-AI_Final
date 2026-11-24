@@ -336,3 +336,39 @@ All dates are logged in local time (UTC+05:30).
   - Run static checks and pytest.
 - **Known issues / COLAB-ONLY**:
   - Preprocessing and batch mock pipelines run offline on local CPU. Neural inpainting inference requires Google Colab T4 GPU.
+
+---
+
+### [2026-11-24 22:45] - Add Character-Level LSTM Text Generation Module (Phase 8)
+- **What was done**:
+  - Implemented `src/text/make_corpus.py`: Generates 400-600 lines of raw specification change sentences from templates and vocabulary lists (parts, materials, colors, finishes). Injects deliberate realistic noise (random casing, extra spaces, stray punctuation, duplicates, blank lines) with a fixed seed, plus user append support.
+  - Implemented `src/text/preprocess_text.py`: Normalizes casing, whitespace, punctuation, drops empty/duplicate lines, extracts character vocabulary (`vocab.json`), builds sliding-window sequence tensors (`seq_len=40, stride=3`), splits train/val 90/10, and logs stats to `outputs/text/dataset_stats.json`.
+  - Implemented `src/text/model.py`: `CharLSTM` PyTorch model (Embedding 64 -> 2-layer LSTM hidden 256 -> Linear vocab_size) with hidden state initialization and forward pass.
+  - Implemented `src/text/train.py`: CLI training pipeline (`python -m src.text.train --epochs 30 --batch 128 --lr 2e-3`) with train/val loss & perplexity tracking, gradient clipping (1.0), best checkpoint saving (`outputs/text/charlstm.pt`), loss curve plotting (`outputs/text/loss_curve.png`), and `training_log.csv`.
+  - Implemented `src/text/generate.py`: Autoregressive character sampling with temperature control (0.2-1.5), top-k filtering, newline termination, and CLI (`python -m src.text.generate`).
+  - Implemented `src/text/evaluate_text.py`: Evaluates 150 samples across 5 seeds x 3 temperatures (0.5, 0.8, 1.1) x 10 runs for validation perplexity (1.39), format validity (100%), vocabulary validity (95%), catalog relevance (93.3%), distinct-1/2 diversity, duplicate rate, and qualitative best/worst tables saved to `outputs/text/text_eval.csv` and `outputs/text/text_eval_summary.md`.
+  - Implemented `src/text/spec_parser.py`: Robust natural language specification line parser extracting `part`, `color`, `material`, `finish`.
+  - Integrated into image pipeline: Added `build_prompt_from_text` to `src/prompts.py` and an interactive "Generate a spec update (LSTM)" accordion to Tab 1 of `app.py` with auto-filling and friendly missing-checkpoint notifications.
+  - Added unit test suite `tests/test_text.py` with 7 test cases covering clean_text, vocab round trip, sequence shapes, model forward shape, CPU training smoke test (<10s), generation, and spec parser.
+  - Added Google Colab cells (Cells 12, 13, 14) in `notebooks/colab_run.ipynb` covering corpus creation, training with loss curve display, generation, and evaluation summary.
+  - Updated `scripts/validate_colab.py` validating all 17 cells.
+- **Files touched**:
+  - `src/text/__init__.py` (new)
+  - `src/text/make_corpus.py` (new)
+  - `src/text/preprocess_text.py` (new)
+  - `src/text/model.py` (new)
+  - `src/text/train.py` (new)
+  - `src/text/generate.py` (new)
+  - `src/text/evaluate_text.py` (new)
+  - `src/text/spec_parser.py` (new)
+  - `src/prompts.py`
+  - `src/__init__.py`
+  - `app.py`
+  - `tests/test_text.py` (new)
+  - `notebooks/colab_run.ipynb`
+  - `scripts/validate_colab.py`
+  - `DECISIONS.md`
+  - `PLAN.md`
+  - `PROGRESS.md`
+- **Known issues / COLAB-ONLY**:
+  - Full 30-epoch training and diffusion image inpainting are targeted for Google Colab T4 GPU (marked COLAB-ONLY). Local CPU verification runs lightweight 1-epoch / 3-epoch smoke runs with mock image inpainting.

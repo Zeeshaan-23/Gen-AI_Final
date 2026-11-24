@@ -95,3 +95,19 @@ This document outlines the 5 execution phases of CatalogUpdate AI. Each phase in
 - [x] Update documentation and notebook validation assertions
 
 **Acceptance Criterion**: Preprocessing CLI runs on CPU; corrupt files are skipped without crash; unmasked SSIM compares against cleaned images; unit tests pass with zero errors.
+
+---
+
+## Phase 8: Character-Level LSTM Text Generation Module
+- [x] Implement `src/text/make_corpus.py` to generate raw furniture specification corpus with intentional realistic noise (400-600 lines, fixed seed, user append option)
+- [x] Implement `src/text/preprocess_text.py` (clean_text, tokenize, make_sequences, train/val split, dataset_stats.json)
+- [x] Implement `src/text/model.py` (`CharLSTM` architecture: Embedding -> 2-layer LSTM hidden 256 -> Linear)
+- [x] Implement `src/text/train.py` (CLI with loss and perplexity logging, best checkpoint `charlstm.pt`, `loss_curve.png`, `training_log.csv`, gradient clipping)
+- [x] Implement `src/text/generate.py` (sampling with temperature control, top-k filtering, newline termination, CLI)
+- [x] Implement `src/text/evaluate_text.py` (150 samples across 5 seeds x 3 temperatures, validation PPL, format validity, vocabulary validity, relevance, distinct-1/2 diversity, best/worst qualitative tables, `text_eval.csv`, `text_eval_summary.md`)
+- [x] Implement `src/text/spec_parser.py` (`parse_spec_line`), integrate with `src/prompts.py` (`build_prompt_from_text`), and add Gradio UI accordion to Tab 1
+- [x] Implement unit tests in `tests/test_text.py` covering cleaning edge cases, vocab round trip, sequence shapes, model forward shape, CPU training smoke test (<10s), generation, and spec parser
+- [x] Add Google Colab notebook cells (Cells 12, 13, 14) executing corpus generation, preprocessing, training, loss curve display, generation, and evaluation summary
+- [x] Update documentation (README.md, PLAN.md, PROGRESS.md, DECISIONS.md, DEMO.md)
+
+**Acceptance Criterion**: All text modules run cleanly on local CPU with zero new heavy dependencies; 1-epoch training smoke test passes in under 10 seconds; app imports cleanly without loading models; Colab cells run 30-epoch training in under 10 minutes.

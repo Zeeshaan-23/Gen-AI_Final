@@ -21,8 +21,11 @@ Google Colab provides a free 16GB Nvidia T4 GPU, which is the target production 
    - **Cell 8 & 9**: Runs the batch pipeline across `data/input/` and displays the before/mask/after comparison grid.
    - **Cell 10**: Runs the batch pipeline with ControlNet structure preservation (`--controlnet`, `--controlnet-scale 0.8`).
    - **Cell 11**: Runs comparative evaluation (`python -m src.compare`) rendering a 4-column visual comparison grid (`Original | Mask | Without ControlNet | With ControlNet`) and reporting edge-map SSIM metrics.
-   - **Cell 12**: Zips all outputs into a downloadable archive.
-   - **Cell 13**: Launches the interactive Gradio web application with a public `gradio.live` link.
+   - **Cell 12**: Generates raw spec corpus (`make_corpus`) and runs text preprocessing (`preprocess_text`) logging dataset statistics.
+   - **Cell 13**: Trains the `CharLSTM` model across 30 epochs and displays the loss curve.
+   - **Cell 14**: Samples specifications across temperatures and runs comprehensive quantitative text evaluation (`evaluate_text`).
+   - **Cell 15**: Zips all outputs into a downloadable archive.
+   - **Cell 16**: Launches the interactive Gradio web application with a public `gradio.live` link.
 
 ---
 
@@ -97,10 +100,42 @@ On GPU (e.g., Colab T4), omit `--mock` to run full neural inference.
 
 ---
 
-## 5. Running the Gradio Web Application Locally
+## 5. Running the Character-Level LSTM Text Generation Pipeline
+
+To generate and evaluate natural language furniture specification updates:
+
+```bash
+# 1. Generate realistic raw corpus (400-600 lines) with intentional mess
+python -m src.text.make_corpus --lines 500 --seed 42
+
+# 2. Clean text, extract character vocabulary, and save dataset stats
+python -m src.text.preprocess_text --input data/text/furniture_specs_raw.txt --output outputs/text
+
+# 3. Train CharLSTM (30 epochs, fast on Colab T4 GPU ~20-40s; CPU supported)
+python -m src.text.train --epochs 30 --batch 128 --lr 2e-3
+
+# 4. Generate specification updates with temperature control
+python -m src.text.generate --seed "Update: chair legs changed to" --temperature 0.8 --one-line
+
+# 5. Run quantitative & qualitative evaluation (150 samples across 5 seeds x 3 temperatures)
+python -m src.text.evaluate_text --checkpoint outputs/text/charlstm.pt --output-dir outputs/text
+```
+
+### Outputs Generated:
+- `outputs/text/vocab.json`: Character vocabulary dictionary mappings.
+- `outputs/text/dataset_stats.json`: Raw/clean line counts, sequence counts, and vocabulary statistics.
+- `outputs/text/charlstm.pt`: Best model weights checkpoint.
+- `outputs/text/loss_curve.png`: Training vs. Validation loss trajectory plot.
+- `outputs/text/training_log.csv`: Epoch-by-epoch loss, perplexity, and elapsed time logs.
+- `outputs/text/text_eval.csv`: Granular evaluation metrics for all 150 test samples.
+- `outputs/text/text_eval_summary.md`: Benchmark summary table with best/worst qualitative samples.
+
+---
+
+## 6. Running the Gradio Web Application Locally
 
 The Gradio web interface provides a dual-tab experience:
-1. **Tab 1 ("Batch Catalog Update")**: Multi-image drag-and-drop upload, part and spec textboxes, preset dropdowns, ControlNet toggle and strength slider, advanced diffusion tuning accordion, edge map preview gallery, and downloadable ZIP output.
+1. **Tab 1 ("Batch Catalog Update")**: Multi-image drag-and-drop upload, LSTM Spec Generator accordion with temperature slider, preset dropdowns, ControlNet toggle and strength slider, advanced diffusion tuning accordion, edge map preview gallery, and downloadable ZIP output.
 2. **Tab 2 ("Single Image (Manual Mask)")**: Interactive canvas (`gr.ImageEditor`) supporting manual brush strokes and zero-shot CLIPSeg auto-masking, with ControlNet structure preservation and edge map preview.
 
 ### To Launch Locally (CPU / Mock Mode):
@@ -120,12 +155,12 @@ Open `http://127.0.0.1:7860` in any web browser.
 
 ---
 
-## 6. Running the Test Suite & Static Analysis
+## 7. Running the Test Suite & Static Analysis
 
 All tests run cleanly on local CPU without model downloads:
 
 ```bash
-# Run unit tests (25 test cases covering batch, engine, prompts, evaluate, controlnet, and preprocess)
+# Run unit tests (32 test cases covering batch, engine, prompts, evaluate, controlnet, preprocess, and text)
 pytest -q
 
 # Run static analysis

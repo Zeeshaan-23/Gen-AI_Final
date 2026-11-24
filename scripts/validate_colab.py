@@ -12,7 +12,7 @@ print("=== 1. Schema Validation ===")
 nbformat.validate(nb)
 print("nbformat validation: PASS (Valid v4 schema)")
 print(f"Total cells: {len(nb.cells)}")
-assert len(nb.cells) == 14, f"Expected 14 cells, got {len(nb.cells)}"
+assert len(nb.cells) == 17, f"Expected 17 cells, got {len(nb.cells)}"
 
 print("\n=== 2. Cell 2 Repo URL Placeholder Verification ===")
 c2_source = "".join(nb.cells[2].source)
@@ -56,9 +56,27 @@ assert "compare_controlnet" in c11_source
 assert "grid_path" in c11_source
 print("Cell 11 ControlNet comparison pipeline: PASS")
 
-print("\n=== 9. Cell 13 Public Gradio Share Verification ===")
+print("\n=== 9. Cell 12 Text Preprocessing Verification ===")
+c12_source = "".join(nb.cells[12].source)
+assert "make_corpus" in c12_source
+assert "preprocess_text" in c12_source
+print("Cell 12 Text corpus generation & preprocessing: PASS")
+
+print("\n=== 10. Cell 13 CharLSTM Training Verification ===")
 c13_source = "".join(nb.cells[13].source)
-assert "--share" in c13_source
-print("Cell 13 Gradio launch with --share: PASS")
+assert "src.text.train" in c13_source
+assert "loss_curve.png" in c13_source
+print("Cell 13 CharLSTM training & loss curve display: PASS")
+
+print("\n=== 11. Cell 14 Text Evaluation Verification ===")
+c14_source = "".join(nb.cells[14].source)
+assert "src.text.generate" in c14_source
+assert "src.text.evaluate_text" in c14_source
+print("Cell 14 Text generation sampling & evaluation summary: PASS")
+
+print("\n=== 12. Cell 16 Public Gradio Share Verification ===")
+c16_source = "".join(nb.cells[16].source)
+assert "--share" in c16_source
+print("Cell 16 Gradio launch with --share: PASS")
 
 print("\nColab Readiness Overall Status: PASS")

@@ -58,6 +58,8 @@ Gen-AI_Final/
   PROGRESS.md
   DECISIONS.md
   DEMO.md
+  REPORT.md
+  CHANGELOG.md
   README.md
   requirements.txt
   .gitignore
@@ -89,11 +91,15 @@ Gen-AI_Final/
     test_preprocess.py
     test_prompts.py
     test_text.py
+  docs/
+    figures/
+      README.md
   notebooks/
     colab_run.ipynb
   data/
     input/
     output/
+    text/
   verification/
     VERIFICATION.md
     logs/

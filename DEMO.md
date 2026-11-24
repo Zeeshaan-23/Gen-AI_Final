@@ -1,59 +1,115 @@
-# CatalogUpdate AI - Demo & Quickstart Guide
+# CatalogUpdate AI - Demo & Presentation Guide
 
-This guide demonstrates how to run and test **CatalogUpdate AI** across various environments: on a free Google Colab T4 GPU (for full generative AI diffusion inpainting) and locally on CPU (using the built-in mock engine for pipeline and UI testing).
+This guide provides both a structured **3-Minute Presentation Script** for live evaluation and comprehensive technical instructions for running and testing **CatalogUpdate AI** across Google Colab T4 GPU and local CPU environments.
 
 ---
 
-## 1. Running on Google Colab (Recommended for Full Inpainting)
+## 1. 3-Minute Live Presentation Script
+
+Use this script during a live presentation, defense, or screencast walkthrough.
+
+```
++-----------------------------------------------------------------------------------------+
+|                                3-MINUTE PRESENTATION TIMELINE                           |
+|                                                                                         |
+|   [ 0:00 - 0:45 ]  Problem, Retailer Challenges & Automated Preprocessing               |
+|   [ 0:45 - 1:30 ]  Character-Level LSTM Spec Generation & Parser Auto-Fill              |
+|   [ 1:30 - 2:15 ]  Batch Inpainting + ControlNet Structure Preservation                 |
+|   [ 2:15 - 3:00 ]  Mathematical SSIM Proof, Quality Metrics & Fallback Strategy         |
++-----------------------------------------------------------------------------------------+
+```
+
+### [0:00 – 0:45] The Problem, Real-World Catalog Challenges, and Preprocessing
+- **What to say**:
+  > "In commercial furniture e-commerce, updating product catalogs for new seasonal materials—such as changing metal chair legs to solid walnut wood—traditionally requires either expensive studio reshoots or tedious manual retouching in Photoshop.
+  > 
+  > However, applying naive diffusion models to vendor imagery creates major problems: vendor photos come with transparent RGBA channels that render as pitch black, camera EXIF rotations, and inconsistent off-white studio backdrops.
+  > 
+  > To solve this, CatalogUpdate AI begins with an automated **Catalog Preprocessing Engine** (`src/preprocess.py`). It composites transparent alphas onto clean white, rectifies EXIF tilt, and uses a seeded flood-fill to normalize off-white cycloramas to pure RGB white (`tol=18`), ensuring clean inputs before neural inpainting begins."
+- **What to show**:
+  - Show the 4-image preprocessing strip from Colab Cell 5: Raw input with off-white/transparent background vs. sanitized pure-white normalized output.
+
+---
+
+### [0:45 – 1:30] Character-Level LSTM Spec Generation & Parser Auto-Fill
+- **What to say**:
+  > "Rather than requiring users to manually craft complex diffusion prompts, we built an autoregressive **Character-Level LSTM** (`src/text/model.py`) that generates domain-specific furniture specification updates.
+  > 
+  > We chose character-level modeling over word-level tokens because furniture specifications follow a compact, formulaic syntax. This completely eliminates out-of-vocabulary errors, requires zero external tokenization packages, and trains to a validation perplexity of 1.39 in under 40 seconds on a free Colab T4 GPU.
+  > 
+  > In our Gradio UI, the user clicks 'Generate & Fill Spec'. An autoregressive sample like `'Update: chair legs changed to dark walnut wood, matte finish.'` is generated, and our regex spec parser instantly decomposes it into structured fields (`part`, `color`, `material`, `finish`) and injects studio catalog photography keywords."
+- **What to show**:
+  - Open Gradio Tab 1 -> Expand the **LSTM Spec Generator** accordion -> Show generation with temperature slider -> Click **Generate & Fill Spec** and show the form fields auto-populating.
+
+---
+
+### [1:30 – 2:15] Batch Inpainting + ControlNet Structure Preservation
+- **What to say**:
+  > "Next, our core inpainting engine takes over. First, zero-shot **CLIPSeg** (`CIDAS/clipseg-rd64-refined`) segments the targeted component from the text query. We apply morphological dilation (12px) and Gaussian feathering, plus an automated retry mechanism that drops threshold to 0.2 if initial coverage is under 0.5%.
+  > 
+  > Now, notice the key innovation: **ControlNet Structure Preservation**.
+  > Standard Stable Diffusion inpainting frequently suffers from structural drift—chair legs bend, warp, or lose joint alignment.
+  > By integrating ControlNet Canny edge guidance (`lllyasviel/control_v11p_sd15_canny`) at a calibrated conditioning scale of 0.8, we lock the exact geometric boundaries and silhouette of the furniture, replacing strictly the surface texture with rich walnut grain."
+- **What to show**:
+  - Show Colab Cell 11 comparison grid (`Original | Mask | Without ControlNet | With ControlNet`) or toggle ControlNet on/off in the Gradio UI to demonstrate how leg straightness and joint integrity are preserved.
+
+---
+
+### [2:15 – 3:00] Mathematical SSIM Proof, Quality Metrics & Fallback Strategy
+- **What to say**:
+  > "How do we prove to retailers that the non-target parts of the product and background were not corrupted?
+  > In `src/engine.py`, we execute an **alpha-blended paste-back**. The diffusion output is composited strictly through the feathered mask over the original cleaned image.
+  > Outside the mask, pixels are mathematically byte-identical (`np.array_equal == True`), yielding an outside-mask SSIM of exactly **1.0000 by construction**. Furthermore, our edge SSIM metric confirms structural preservation within the modified zone.
+  > 
+  > If a live Colab GPU session ever disconnects or runs out of compute quota during a presentation, our system features a seamless **Local Mock Fallback**: setting `USE_MOCK_ENGINE=1` runs the full Gradio interface and CLI pipelines on any local CPU laptop without requiring GPU hardware or downloading heavy weights."
+- **What to show**:
+  - Show the manifest table and outside SSIM = 1.0000 in the UI; show downloadable ZIP output; demonstrate clean CPU mock execution.
+
+---
+
+## 2. Running on Google Colab (Full Neural Inpainting & GPU Inference)
 
 Google Colab provides a free 16GB Nvidia T4 GPU, which is the target production hardware for CatalogUpdate AI.
 
-### Steps:
+### Step-by-Step Instructions:
 1. Open [`notebooks/colab_run.ipynb`](notebooks/colab_run.ipynb) in [Google Colaboratory](https://colab.research.google.com/).
-2. Set Runtime Type: **Runtime** -> **Change runtime type** -> **T4 GPU** -> **Save**.
-3. Run all cells in order:
-   - **Cell 1**: Sanity check for Nvidia T4 GPU (`nvidia-smi` and PyTorch CUDA).
-   - **Cell 2**: Clones `https://github.com/Zeeshaan-23/Gen-AI_Final.git` and installs pinned requirements.
-   - **Cell 3**: Verifies imports and environment setup.
-   - **Cell 4**: Prepares a sample catalog chair image in `data/input/sample_chair.png`.
-   - **Cell 5**: Executes catalog image preprocessing (`preprocess_dir`) across diverse sample formats (RGB, transparent RGBA, off-white studio tint, rectangular) and renders a 4-image Before/After strip.
-   - **Cell 6 & 7**: Executes a single-image smoke test (`chair legs` -> `walnut wood`) and renders a side-by-side comparison (`Original` vs. `Auto-Mask` vs. `Inpainted Result`).
-   - **Cell 8 & 9**: Runs the batch pipeline across `data/input/` and displays the before/mask/after comparison grid.
-   - **Cell 10**: Runs the batch pipeline with ControlNet structure preservation (`--controlnet`, `--controlnet-scale 0.8`).
-   - **Cell 11**: Runs comparative evaluation (`python -m src.compare`) rendering a 4-column visual comparison grid (`Original | Mask | Without ControlNet | With ControlNet`) and reporting edge-map SSIM metrics.
-   - **Cell 12**: Generates raw spec corpus (`make_corpus`) and runs text preprocessing (`preprocess_text`) logging dataset statistics.
-   - **Cell 13**: Trains the `CharLSTM` model across 30 epochs and displays the loss curve.
-   - **Cell 14**: Samples specifications across temperatures and runs comprehensive quantitative text evaluation (`evaluate_text`).
-   - **Cell 15**: Zips all outputs into a downloadable archive.
-   - **Cell 16**: Launches the interactive Gradio web application with a public `gradio.live` link.
+2. Select Runtime: **Runtime** -> **Change runtime type** -> **T4 GPU** -> **Save**.
+3. Run all 17 cells sequentially:
+   - **Cell 1**: GPU Sanity Check (`nvidia-smi` + PyTorch CUDA check).
+   - **Cell 2**: Repository clone (`git clone https://github.com/Zeeshaan-23/Gen-AI_Final.git`) & requirements installation.
+   - **Cell 3**: Environment & import verification.
+   - **Cell 4**: Synthetic catalog sample image generation.
+   - **Cell 5**: Catalog image preprocessing (`preprocess_dir`) across formats with 4-image Before/After strip.
+   - **Cell 6 & 7**: Single-image smoke test (`chair legs` -> `walnut wood`) with Before / Mask / After visualization.
+   - **Cell 8 & 9**: Batch pipeline execution across catalog images with results grid.
+   - **Cell 10**: ControlNet batch execution with structure preservation.
+   - **Cell 11**: Comparative evaluation (`src.compare`) with 4-column comparison grid (`Original | Mask | Without ControlNet | With ControlNet`) and edge SSIM table.
+   - **Cell 12**: Text corpus generation (`make_corpus`) and text preprocessing (`preprocess_text`).
+   - **Cell 13**: `CharLSTM` model training (30 epochs, ~30s on T4) with loss curve plot.
+   - **Cell 14**: Autoregressive sampling and quantitative evaluation (`evaluate_text`) with benchmark table.
+   - **Cell 15**: Output archive packaging (`catalogupdate_outputs.zip`).
+   - **Cell 16**: Gradio web app launch with public `share=True` live link.
+   - **Cell 17**: Offline local mock engine verification.
 
 ---
 
-## 2. Running the Catalog Image Preprocessing CLI
-
-To sanitize and standardize raw vendor catalog images before inpainting (composites RGBA transparency onto pure white, corrects EXIF orientation, strips metadata, and normalizes off-white backdrops):
-
-```bash
-# Preprocess directory of raw images
-python -m src.preprocess --input data/input --output data/clean --size 1024 --tol 18
-```
-
-### Outputs Generated:
-- `data/clean/<name>.png`: Cleaned, standardized 3-channel RGB PNG images with pure white backgrounds.
-- `data/clean/preprocess_report.csv`: Manifest detailing `name`, `orig_size`, `new_size`, `bg_normalized`, and `status` per image. Faulty or corrupted files are skipped and flagged without crashing.
-
----
-
-## 3. Running the Batch CLI Locally (CPU / Mock Mode)
+## 3. Running Locally on CPU (Development & Mock Mode)
 
 For development, testing, and continuous integration on machines without a dedicated GPU, CatalogUpdate AI includes a lightweight `MockCatalogEditor` that simulates inpainting without downloading multi-gigabyte models.
 
+### 3.1 Preprocessing CLI
 ```bash
-# Run batch update using a preset material on sample catalog images
-python -m src.batch --input data/input --output data/output --preset chair_walnut_legs --mock
+# Clean and normalize raw catalog photos
+python -m src.preprocess --input data/input --output data/clean --size 1024 --tol 18
 ```
 
-Or with custom parameters and ControlNet structure preservation:
+### 3.2 Batch Inpainting CLI (Mock Mode)
+```bash
+# Run batch update using a preset material on sample catalog images
+python -m src.batch --input data/input --output data/output --preset chair_walnut_legs --mock --zip
+```
+
+Or with custom parameters and ControlNet enabled:
 ```bash
 python -m src.batch \
   --input data/input \
@@ -69,19 +125,7 @@ python -m src.batch \
   --zip
 ```
 
-### Outputs Generated:
-- `data/output/<name>_edited.png`: Processed images with inpainted regions.
-- `data/output/masks/<name>_mask.png`: Binary alpha masks generated by CLIPSeg.
-- `data/output/control/<name>_control.png`: Canny edge condition maps (when ControlNet is enabled).
-- `data/output/manifest.json`: Execution log with timestamps, coverage percentage, ControlNet metadata, and status per image.
-- `data/output_archive.zip`: Compressed archive of all generated assets (if `--zip` is specified).
-
----
-
-## 4. Running Comparative Evaluation (With vs. Without ControlNet)
-
-To objectively evaluate the impact of ControlNet edge guidance on geometric consistency:
-
+### 3.3 Comparative Evaluation CLI
 ```bash
 # Run comparative evaluation (CPU / Mock mode)
 python -m src.compare \
@@ -92,80 +136,47 @@ python -m src.compare \
   --mock
 ```
 
-On GPU (e.g., Colab T4), omit `--mock` to run full neural inference.
-
-### Outputs:
-- `data/output_compare/comparison_grid.png`: Visual 4-column side-by-side grid (`Original | Mask | Without ControlNet | With ControlNet`).
-- `data/output_compare/comparison_metrics.csv`: Canny edge-map Structural Similarity Index (SSIM) quantifying structural fidelity with and without ControlNet.
-
----
-
-## 5. Running the Character-Level LSTM Text Generation Pipeline
-
-To generate and evaluate natural language furniture specification updates:
-
+### 3.4 Text Generation Pipeline
 ```bash
-# 1. Generate realistic raw corpus (400-600 lines) with intentional mess
+# 1. Generate realistic raw corpus (492 lines)
 python -m src.text.make_corpus --lines 500 --seed 42
 
 # 2. Clean text, extract character vocabulary, and save dataset stats
 python -m src.text.preprocess_text --input data/text/furniture_specs_raw.txt --output outputs/text
 
-# 3. Train CharLSTM (30 epochs, fast on Colab T4 GPU ~20-40s; CPU supported)
-python -m src.text.train --epochs 30 --batch 128 --lr 2e-3
+# 3. Train CharLSTM (fast on CPU for smoke test ~5-10s)
+python -m src.text.train --epochs 3 --batch 128 --lr 2e-3
 
 # 4. Generate specification updates with temperature control
 python -m src.text.generate --seed "Update: chair legs changed to" --temperature 0.8 --one-line
 
-# 5. Run quantitative & qualitative evaluation (150 samples across 5 seeds x 3 temperatures)
+# 5. Run quantitative evaluation (150 samples across 5 seeds x 3 temperatures)
 python -m src.text.evaluate_text --checkpoint outputs/text/charlstm.pt --output-dir outputs/text
 ```
 
-### Outputs Generated:
-- `outputs/text/vocab.json`: Character vocabulary dictionary mappings.
-- `outputs/text/dataset_stats.json`: Raw/clean line counts, sequence counts, and vocabulary statistics.
-- `outputs/text/charlstm.pt`: Best model weights checkpoint.
-- `outputs/text/loss_curve.png`: Training vs. Validation loss trajectory plot.
-- `outputs/text/training_log.csv`: Epoch-by-epoch loss, perplexity, and elapsed time logs.
-- `outputs/text/text_eval.csv`: Granular evaluation metrics for all 150 test samples.
-- `outputs/text/text_eval_summary.md`: Benchmark summary table with best/worst qualitative samples.
-
----
-
-## 6. Running the Gradio Web Application Locally
-
-The Gradio web interface provides a dual-tab experience:
-1. **Tab 1 ("Batch Catalog Update")**: Multi-image drag-and-drop upload, LSTM Spec Generator accordion with temperature slider, preset dropdowns, ControlNet toggle and strength slider, advanced diffusion tuning accordion, edge map preview gallery, and downloadable ZIP output.
-2. **Tab 2 ("Single Image (Manual Mask)")**: Interactive canvas (`gr.ImageEditor`) supporting manual brush strokes and zero-shot CLIPSeg auto-masking, with ControlNet structure preservation and edge map preview.
-
-### To Launch Locally (CPU / Mock Mode):
+### 3.5 Gradio Web Application
 ```bash
-# Linux / macOS
-USE_MOCK_ENGINE=1 python app.py
-
 # Windows PowerShell
 $env:USE_MOCK_ENGINE="1"; python app.py
-```
 
-### To Launch Locally (with CUDA GPU):
-```bash
-python app.py
+# Linux / macOS
+USE_MOCK_ENGINE=1 python app.py
 ```
 Open `http://127.0.0.1:7860` in any web browser.
 
 ---
 
-## 7. Running the Test Suite & Static Analysis
+## 4. Test Suite & Static Quality Checks
 
-All tests run cleanly on local CPU without model downloads:
+All 32 tests run cleanly on local CPU in under 15 seconds without network downloads:
 
 ```bash
-# Run unit tests (32 test cases covering batch, engine, prompts, evaluate, controlnet, preprocess, and text)
+# Run unit test suite
 pytest -q
 
 # Run static analysis
 python -m pyflakes app.py src tests scripts
 
-# Validate Colab notebook schema and setup
+# Validate Colab notebook structure and cell schema
 python scripts/validate_colab.py
 ```

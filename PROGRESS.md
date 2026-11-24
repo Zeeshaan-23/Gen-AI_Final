@@ -372,3 +372,30 @@ All dates are logged in local time (UTC+05:30).
   - `PROGRESS.md`
 - **Known issues / COLAB-ONLY**:
   - Full 30-epoch training and diffusion image inpainting are targeted for Google Colab T4 GPU (marked COLAB-ONLY). Local CPU verification runs lightweight 1-epoch / 3-epoch smoke runs with mock image inpainting.
+
+---
+
+### [2026-11-24 23:00] - Documentation, Report & Final Presentation Materials (Phase 9)
+- **What was done**:
+  - Audited version control hygiene: Verified `.gitignore` prevents tracking of binary model weights (`*.pt`), cache folders (`__pycache__`), and output artifacts. Relaxed `requirements.txt` pin from `numpy>=1.24.4,<2.0.0` to `numpy>=1.24.4` to avoid solver conflicts on Google Colab default runtimes.
+  - Authored `CHANGELOG.md`: Detailed chronological mapping of git commits (`bdd83f4` through `930432b`) to project phases, evaluated commit quality (imperative mood, separation of concerns, traceability), and listed recommendations for future versioning.
+  - Authored `REPORT.md`: Complete, comprehensive 12-section technical project report including Abstract, Problem Statement & Motivation, System Architecture (detailed ASCII flowchart), Data Engineering (catalog images & synthetic text corpus), Methods (exact hyperparameters from `src/config.py`), Text Module Experiments (CharLSTM convergence, temperature benchmark table, qualitative evaluation), Image Experiments (ControlNet edge preservation, SSIM = 1.0000 mathematical proof, latency), Challenges & Solutions (NumPy ABI, VAE dtype crash, mask sizing, layout cleanup), Limitations & Future Work, Conclusion, Step-by-Step Colab Reproduction Guide, References, and Requirements-to-Evidence Traceability Matrix.
+  - Authored `docs/figures/README.md`: Standardized guide for capturing and storing the exact 8 visual figures (`01_gpu_check.png` through `08_gradio_ui_lstm.png`) from Colab notebook outputs.
+  - Updated `DEMO.md`: Integrated a 3-minute live presentation script with timed segments (0:00-0:45 Preprocessing, 0:45-1:30 LSTM Spec Generation, 1:30-2:15 ControlNet Inpainting, 2:15-3:00 Mathematical Proofs & Offline Fallback).
+  - Synchronized all tracking files (`PROJECT.md`, `PLAN.md`, `PROGRESS.md`, `DECISIONS.md`).
+- **Files touched**:
+  - `requirements.txt`
+  - `CHANGELOG.md` (new)
+  - `REPORT.md` (new)
+  - `docs/figures/README.md` (new)
+  - `DEMO.md`
+  - `PROJECT.md`
+  - `PLAN.md`
+  - `PROGRESS.md`
+  - `DECISIONS.md`
+- **What is next**:
+  - Run full test suite (`pytest -q`), static analysis (`pyflakes`), and Colab validation (`scripts/validate_colab.py`).
+  - Stage all files, commit, and output the push command for the user.
+- **Known issues / COLAB-ONLY**:
+  - Local CPU execution operates in mock mode for diffusion inpainting and runs smoke tests for CharLSTM. Full neural inpainting with ControlNet and 30-epoch LSTM training are executed on Google Colab T4 GPU (marked COLAB-RESULT-NEEDED).
+

@@ -27,6 +27,7 @@ This document records technical decisions, model choices, parameter choices, and
 - **Centralized Hyperparameter Configuration**: Established `src/config.py` as the single source of truth for all diffusion, inpainting, and segmentation defaults.
 - **Structured Spec Prompt Engineering**: `build_prompt` in `src/prompts.py` decouples specification changes (`color`, `material`, `finish`) from free-text while enforcing standardized studio catalog lighting keywords.
 - **Automatic Mask Recovery (Retry with Lower Threshold)**: Added a single-retry recovery mechanism in `src/batch.py` that lowers the CLIPSeg threshold to 0.2 and widens dilation when initial mask coverage is below 0.5%, recovering thin furniture legs and angled parts without manual intervention.
+- **Unified FP16 Inpainting Pipeline (No VAE Float32 Upcast)**: Kept the SD inpainting pipeline entirely in fp16 on CUDA to eliminate `RuntimeError: Input type (c10::Half) and bias type (float) should be the same` tensor dtype mismatch during VAE decoding.
 
 ---
 

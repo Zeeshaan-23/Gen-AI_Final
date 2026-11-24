@@ -118,9 +118,6 @@ class CatalogEditor:
         )
         self._inpaint_pipe.to(self.device)
         self._inpaint_pipe.enable_attention_slicing()
-        if self.device == "cuda":
-            # Upcast VAE to float32 to prevent FP16 numerical overflow (black output images)
-            self._inpaint_pipe.vae.to(dtype=torch.float32)
 
     def generate_mask(
         self,

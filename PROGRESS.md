@@ -253,3 +253,19 @@ All dates are logged in local time (UTC+05:30).
   - Ready for single clean git commit.
 - **Known issues**:
   - Local workstation is CPU-only; full diffusion GPU inference is intended for Google Colab T4.
+
+---
+
+### [2026-11-24 15:05] - Fix Colab T4 VAE Dtype Mismatch
+- **What was done**:
+  - Removed SD inpaint pipeline VAE float32 upcast in `src/engine.py` (`_load_inpaint`), keeping the entire inpaint pipeline in fp16 on CUDA while preserving attention slicing and CLIPSeg in fp32.
+  - Resolved `RuntimeError: Input type (c10::Half) and bias type (float) should be the same` during inpainting on Colab T4.
+  - Documented decision in `DECISIONS.md`.
+- **Files touched**:
+  - `src/engine.py`
+  - `DECISIONS.md`
+  - `PROGRESS.md`
+- **What is next**:
+  - Verify with pytest and pyflakes, commit, and push.
+- **Known issues**:
+  - None.
